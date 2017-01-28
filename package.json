@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.8.5"
+    "css-loader": "^0.26.1",
+    "json-loader": "^0.5.4",
+    "react-scripts": "0.8.5",
+    "style-loader": "^0.13.1"
   },
   "dependencies": {
     "react": "^15.4.2",

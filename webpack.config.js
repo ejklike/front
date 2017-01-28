@@ -22,7 +22,15 @@ module.exports = {
 					cacheDirectory: true,
 					presets: ['es2015', 'react']
 				}
-			}
+			},
+			{
+				test: /\.css$/,
+				loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__local__[hash:base64:5]'
+			},
+      {
+        test: /\.json$/, 
+        loader: 'json'
+      }
 		]
 	}
 };
