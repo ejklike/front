@@ -2,6 +2,7 @@ import React from 'react';
 import CategoryFilters from '../CategoryFilters/CategoryFilters';
 import Map from '../Map/Map';
 import GoogleApiComponent from '../GoogleApiModules/GoogleApiComponent';
+import Markers from '../Markers/Markers';
 import styles from './Container.css';
 import update from '../../../node_modules/react-addons-update';
 
@@ -24,7 +25,6 @@ export class Container extends React.Component{
   }
 
   isSelected(key) {
-    console.log(key);
     return this.state.CategoryFiltersData[key].isPressed;
   }
 
@@ -46,19 +46,26 @@ export class Container extends React.Component{
       return(
           <div className={styles.container}>
           {this.state.CategoryFiltersData.map((category, i) => {
-            return(
+            return (
               <CategoryFilters name={category.categoryName}
                          pressedKey={i}
                             pressed={this.isSelected(i)}
                            onSelect={this.onSelect}/>
             );
           })}
-          <Map google={this.props.google}/>
+          <Map google={this.props.google}>
+          {this.state.CategoryFiltersData.map((category, i) => {
+            return (
+              <Markers category={category.categoryName}
+                      isPressed={category.isPressed}/>
+            );
+          })}
+          </Map>
           </div>
       );
   }
 }
 
 export default GoogleApiComponent({
-  apiKey: 'AIzaSyDTOr0hyONA5Xfcbh80TP_pyW4umpuRAas'
+  apiKey: API_KEY
 })(Container)
