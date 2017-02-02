@@ -12,7 +12,7 @@ export class Container extends React.Component{
     
     this.state = {
       CategoryFiltersData: [
-        { categoryName: "모두", isPressed: true },
+//        { categoryName: "모두", isPressed: true },
         { categoryName: "식사", isPressed: false },
         { categoryName: "쇼핑", isPressed: false },
         { categoryName: "유흥", isPressed: false },
@@ -67,5 +67,5 @@ export class Container extends React.Component{
 }
 
 export default GoogleApiComponent({
-  apiKey: API_KEY
+  apiKey: 'AIzaSyDTOr0hyONA5Xfcbh80TP_pyW4umpuRAas'
 })(Container)

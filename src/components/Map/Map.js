@@ -23,7 +23,7 @@ export class Map extends React.Component {
       const node = ReactDOM.findDOMNode(mapRef);
 
       //set map options
-      let zoom = 5;
+      let zoom = 13;
       //lat,lng of Tokyo
       let lat = 35.652832 ;
       let lng = 139.839478;
