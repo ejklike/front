@@ -61,8 +61,6 @@ export class Map extends React.Component {
     }
   }
 
-
-
   render() {
     return(
       <div ref='map' className={styles.container}>
