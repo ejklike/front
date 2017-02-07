@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styles from './Map.css';
 import mapStyles from './mapStyles2.json';
 
-export class Map extends React.Component {
+class Map extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -54,8 +54,7 @@ export class Map extends React.Component {
     if(this.props && this.map && this.props.google) {
       return React.Children.map(this.props.children, c => {
         return React.cloneElement(c, {
-          map: this.map,
-          google: this.props.google
+          map: this.map
         });
       });
     }

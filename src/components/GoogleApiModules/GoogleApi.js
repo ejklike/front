@@ -2,7 +2,7 @@ export const GoogleApi = function(opts) {
   opts = opts || {}
 
   const apiKey = opts.apiKey;
-  //const libraries = opts.libraries || [];
+  const libraries = opts.libraries || [];
   const client = opts.client;
   const URL = 'https://maps.googleapis.com/maps/api/js';
 
@@ -21,7 +21,7 @@ export const GoogleApi = function(opts) {
     let params = {
       key: apiKey,
       callback: 'CALLBACK_NAME',
-    //  libraries: libraries.join(','),
+      libraries: libraries.join(','),
       client: client,
       v: googleVersion,
       channel: channel,

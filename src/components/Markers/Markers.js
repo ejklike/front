@@ -4,17 +4,28 @@ import shopping from './shopping.json';
 import entertainment from './entertainment.json';
 import history from './history.json';
 
-export class Markers extends React.Component {
+class Markers extends React.Component {
   constructor(props) {
     super(props);
-    this.setMarkers();
   }
  
+  componentDidMount() {
+    console.log("setMarkers");
+    this.setMarkers();
+
+    if(this.props.isPressed) {
+      this.showMarkers();
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if(this.props.isPressed !== prevProps.isPressed) {
+      console.log("different");
       if(this.props.isPressed) {
+        console.log("click");
         this.showMarkers();
       } else {
+        console.log("cancel");
         this.hideMarkers();
       }
     }
@@ -43,11 +54,40 @@ export class Markers extends React.Component {
       };
 
       let marker = new google.maps.Marker(pref);
+      marker.setOpacity(0.6);
 
+      let request = {
+        placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
+      };
+
+      let service = new google.maps.places.PlacesService(this.props.map); 
+
+      service.getDetails(request, function(place, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          marker.rating = place.rating;
+          marker.placeName = place.name;
+        }
+      });
+      
       marker.addListener('mouseover', () => {
-        marker.setOpacity(0.5);
+        marker.setOpacity(1.0);        
+        
+        const content = "rating: " + marker.rating + "<br>" + "name: " + marker.placeName;
+
+        marker.infoWindow = new google.maps.InfoWindow({
+          content: content
+        })
+
+        marker.infoWindow.open(this.props.map, marker);
       })
       
+      marker.addListener('mouseout', () => {
+        marker.setOpacity(0.6);
+
+        marker.infoWindow.close(this.props.map, marker);
+      })
+
+
       if(this.props.category === "식사") {
         this.props.restaurantMarkers.push(marker);
       } else if(this.props.category === "쇼핑") {
@@ -56,10 +96,8 @@ export class Markers extends React.Component {
         this.props.entertainmentMarkers.push(marker);
       } else if(this.props.category === "유적") {
         this.props.historyMarkers.push(marker);
-      } 
+      }
     }
-
-    //console.log(this.props.category, this.props.markerArr.length);
   }
 
   showMarkers() {
@@ -91,7 +129,7 @@ export class Markers extends React.Component {
       markers = this.props.entertainmentMarkers;
     } else if(this.props.category === "유적") {
       markers = this.props.historyMarkers;
-    } 
+    }
 
     for(var i=0; i<markers.length; i++) {
       markers[i].setMap(null);
@@ -99,7 +137,7 @@ export class Markers extends React.Component {
   } 
    
   render() {
-    return null;
+    return null; 
   }
 }
 
