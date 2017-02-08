@@ -42,11 +42,6 @@ class Map extends React.Component {
       this.map.setMapTypeId('map_style');
 
       console.log("load map");
-      /*
-      const marker = new google.maps.Marker({
-        position: { lat: lat, lng: lng },
-        map: this.map,
-      });*/
     }
 	}
 

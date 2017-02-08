@@ -10,7 +10,6 @@ class Markers extends React.Component {
   }
  
   componentDidMount() {
-    console.log("setMarkers");
     this.setMarkers();
 
     if(this.props.isPressed) {
@@ -20,12 +19,9 @@ class Markers extends React.Component {
 
   componentDidUpdate(prevProps) {
     if(this.props.isPressed !== prevProps.isPressed) {
-      console.log("different");
       if(this.props.isPressed) {
-        console.log("click");
         this.showMarkers();
       } else {
-        console.log("cancel");
         this.hideMarkers();
       }
     }
@@ -33,16 +29,21 @@ class Markers extends React.Component {
   
   setMarkers() {
     let dummies = [];
+    let imgUrl = [];
 
     if(this.props.category === "식사") {
       dummies = restaurant; 
+      imgUrl = require('../../../img/icons/restaurant.png');
     } else if(this.props.category === "쇼핑") {
       dummies = shopping;
+      imgUrl = require('../../../img/icons/shopping.png');
     } else if(this.props.category === "유흥") {
       dummies = entertainment;
-    } else if(this.props.category === "유적") {
+      imgUrl = require('../../../img/icons/entertainment.png');
+   } else if(this.props.category === "유적") {
       dummies = history;
-    } 
+      imgUrl = require('../../../img/icons/history.png');
+  } 
 
     for(var i=0; i<dummies.length; i++)
     {
@@ -50,16 +51,17 @@ class Markers extends React.Component {
         position: {
           lat: dummies[i].pos.lat,
           lng: dummies[i].pos.lng
-        }
+        },
+        icon: imgUrl
       };
 
       let marker = new google.maps.Marker(pref);
-      marker.setOpacity(0.6);
+      marker.setOpacity(0.8);
 
       let request = {
         placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
       };
-
+  
       let service = new google.maps.places.PlacesService(this.props.map); 
 
       service.getDetails(request, function(place, status) {
@@ -82,7 +84,7 @@ class Markers extends React.Component {
       })
       
       marker.addListener('mouseout', () => {
-        marker.setOpacity(0.6);
+        marker.setOpacity(0.8);
 
         marker.infoWindow.close(this.props.map, marker);
       })
