@@ -1,5 +1,6 @@
 import React from 'react';
-import { CategoryFilters, Map, Markers } from '../';
+import Button from 'react-button';
+import { CategoryFilters, Map, Markers, PathSidebar } from '../';
 import GoogleApiComponent from '../GoogleApiModules/GoogleApiComponent';
 import styles from './Container.css';
 import { connect } from 'react-redux';
@@ -12,22 +13,27 @@ class Container extends React.Component {
   render(){
     return(
       <div className={styles.container}>
-      {this.props.categoryData.map((category, i) => {
-        return (
-          <CategoryFilters name={category.categoryName}
-                            idx={i}
-                      isPressed={category.isPressed}/>
-        );
-      })}
-      <Map google={this.props.google}>
-      {this.props.categoryData.map((category, i) => {
-        return (
-          <Markers category={category.categoryName}
-                        idx={i}
-                  isPressed={category.isPressed}/>
-        );
-      })}
-      </Map>
+        <div className={styles.categoryFiltersBar}>
+          {this.props.categoryData.map((category, i) => {
+            return (
+              <CategoryFilters name={category.categoryName}
+                                idx={i}
+                          isPressed={category.isPressed}/>
+            );
+          })}
+        <div className={styles.pathSidebar}>
+          <PathSidebar/>
+        </div>
+        </div>
+        <Map google={this.props.google}>
+        {this.props.categoryData.map((category, i) => {
+          return (
+            <Markers category={category.categoryName}
+                         idx={i}
+                    isPressed={category.isPressed}/>
+          );
+        })}
+        </Map>
       </div>
     );
   }
