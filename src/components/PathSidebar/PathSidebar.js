@@ -16,7 +16,6 @@ class PathSidebar extends React.Component {
 	 componentDidUpdate(prevProps) {
 		if((this.props.isPathSidebarOpen !== prevProps.isPathSidebarOpen) 
       || (this.props.pathData.length !== prevProps.pathData.length)) {
-     
 			return true;
 		}
 		return false;
@@ -31,16 +30,6 @@ class PathSidebar extends React.Component {
 
 	render() {
 	  const styles = {
-			bmBurgerButton: {
-   			position: 'fixed',
-    		width: '36px',
-    		height: '30px',
-    		left: '10px',
-    		top: '10px'
- 		 	},
-  		bmBurgerBars: {
-  		 	background: '#373a47'
-  		},
 		  bmCrossButton: {
  	 			height: '24px',
     		width: '24px'
@@ -49,13 +38,12 @@ class PathSidebar extends React.Component {
    			background: '#bdc3c7'
   		},
   		bmMenu: {
-    		background: '#373a47',
+    		background: '#373a47 !important',
    		 	padding: '0px',
    		 	fontSize: '1.15em',
-        boxShadow: '5px 5px 5px 0px lightgray'
  		  },
  		  bmMorphShape: {
-   			fill: '#373a47'
+   			fill: '#373a47 !important'
   		},
   		bmOverlay: {
     		background: 'rgba(0, 0, 0, 0.3)'
@@ -63,10 +51,11 @@ class PathSidebar extends React.Component {
 		};
 
 		return (
+        <div class="teal lighten-2">
 				<Menu right noOverlay 
               customBurgerIcon={false}
               isOpen={this.props.isPathSidebarOpen}
- 							styles={styles}>
+ 							className={styles.menu}>
           {this.props.pathData.map((path, i) => {
             return (
               <a id="spot" className="menu-item" href="/" key={i}>{path}</a>
@@ -79,6 +68,7 @@ class PathSidebar extends React.Component {
                     onClick={this.handleClick}>
                   경로추가</Button>
 				</Menu>
+        </div>
 		);
 	}
 }

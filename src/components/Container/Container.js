@@ -13,7 +13,7 @@ class Container extends React.Component {
   render() {
     return (
       <div className={styles.container}>
-          <CategoryFilters/>
+        <CategoryFilters/>
         <div className={styles.blogSidebar}>
           <BlogSidebar/>
         </div>

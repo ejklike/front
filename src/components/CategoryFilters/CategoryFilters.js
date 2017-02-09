@@ -17,7 +17,7 @@ class CategoryFilters extends React.Component {
         <NavItem onClick={this.props.onPathSidebarToggle}><Icon>playlist_add</Icon></NavItem>
         {this.props.categoryData.map((category, i) => {
           return(
-            <NavItem class="active" onClick={this.props.onCategoryToggle.bind(this, i)}
+            <NavItem onClick={this.props.onCategoryToggle.bind(this, i)}
                          key={i}>{category.categoryName}</NavItem>
           );
         })}
