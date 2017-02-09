@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'react-button';
-import { CategoryFilters, Map, Markers, PathSidebar } from '../';
+import { CategoryFilters, Map, Markers, PathSidebar, BlogSidebar } from '../';
 import GoogleApiComponent from '../GoogleApiModules/GoogleApiComponent';
 import styles from './Container.css';
 import { connect } from 'react-redux';
@@ -8,10 +8,10 @@ import { connect } from 'react-redux';
 class Container extends React.Component {
   constructor(props) {
     super(props);
-  };
+  }
 
-  render(){
-    return(
+  render() {
+    return (
       <div className={styles.container}>
         <div className={styles.categoryFiltersBar}>
           {this.props.categoryData.map((category, i) => {
@@ -21,9 +21,12 @@ class Container extends React.Component {
                           isPressed={category.isPressed}/>
             );
           })}
-        <div className={styles.pathSidebar}>
-          <PathSidebar/>
-        </div>
+          <div className={styles.blogSidebar}>
+            <BlogSidebar/>
+          </div>
+          <div className={styles.pathSidebar}>
+            <PathSidebar/>
+          </div>
         </div>
         <Map google={this.props.google}>
         {this.props.categoryData.map((category, i) => {
@@ -41,7 +44,10 @@ class Container extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    categoryData: state.category.categoryData
+    categoryData: state.category.categoryData,
+    isBlogSidebarOpen: state.blogSidebar.isBlogSidebarOpen,
+    pathData: state.pathSidebar.pathData,
+    isPathSidebarOpen: state.pathSidebar.isPathSidebarOpen
   };
 }
 

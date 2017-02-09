@@ -3,9 +3,11 @@ import restaurant from './restaurant.json';
 import shopping from './shopping.json';
 import entertainment from './entertainment.json';
 import history from './history.json';
+import { connect } from 'react-redux';
+import { pathToggle, blogToggle, pathAdd } from '../../actions';
 
 class Markers extends React.Component {
-  constructor(props) {
+  constructor(props) {    
     super(props);
   }
  
@@ -89,6 +91,16 @@ class Markers extends React.Component {
         marker.infoWindow.close(this.props.map, marker);
       })
 
+      marker.addListener('click', () => {
+          if(this.props.isPathAddMode) {
+            this.props.onPathAdd(marker.placeName);
+            if(!this.props.isPathSidebarOpen) {
+              this.props.onPathSidebarToggle();
+            }
+          } else {
+            this.props.onBlogSidebarToggle();
+          }
+      })
 
       if(this.props.category === "식사") {
         this.props.restaurantMarkers.push(marker);
@@ -142,6 +154,24 @@ class Markers extends React.Component {
     return null; 
   }
 }
+
+let mapStateToProps = (state) => {
+  return {
+    isPathSidebarOpen: state.pathSidebar.isPathSidebarOpen,
+    isBlogSidebarOpen: state.blogSidebar.isBlogSidebarOpen,
+    isPathAddMode: state.pathSidebar.isPathAddMode
+  };
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    onPathSidebarToggle: () => dispatch(pathToggle()),
+    onBlogSidebarToggle: () => dispatch(blogToggle()),
+    onPathAdd: (spot) => dispatch(pathAdd(spot)),
+  };
+}
+
+Markers = connect(mapStateToProps, mapDispatchToProps)(Markers);
 
 Markers.defaultProps = {
   restaurantMarkers: [],
