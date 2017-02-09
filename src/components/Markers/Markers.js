@@ -4,7 +4,7 @@ import shopping from './shopping.json';
 import entertainment from './entertainment.json';
 import history from './history.json';
 import { connect } from 'react-redux';
-import { pathToggle, blogToggle, pathAdd } from '../../actions';
+import { pathToggle, blogToggle, pathAdd, pathAddModeToggle } from '../../actions';
 
 class Markers extends React.Component {
   constructor(props) {    
@@ -94,6 +94,7 @@ class Markers extends React.Component {
       marker.addListener('click', () => {
           if(this.props.isPathAddMode) {
             this.props.onPathAdd(marker.placeName);
+            this.props.onPathAddModeToggle();
             if(!this.props.isPathSidebarOpen) {
               this.props.onPathSidebarToggle();
             }
@@ -168,6 +169,7 @@ let mapDispatchToProps = (dispatch) => {
     onPathSidebarToggle: () => dispatch(pathToggle()),
     onBlogSidebarToggle: () => dispatch(blogToggle()),
     onPathAdd: (spot) => dispatch(pathAdd(spot)),
+    onPathAddModeToggle: () => dispatch(pathAddModeToggle())
   };
 }
 

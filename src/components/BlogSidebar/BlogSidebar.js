@@ -56,7 +56,9 @@ class BlogSidebar extends React.Component {
 		};
 
 		return (
-				<Menu noOverlay isOpen={this.props.isBlogSidebarOpen}
+				<Menu noOverlay 
+              customBurgerIcon={false}
+                isOpen={this.props.isBlogSidebarOpen}
 												styles={styles}>
 					<a id="add" href="/">More details...</a>
 				</Menu>

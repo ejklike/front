@@ -1,9 +1,9 @@
 import React from 'react';
-import Button from 'react-button';
 import { CategoryFilters, Map, Markers, PathSidebar, BlogSidebar } from '../';
 import GoogleApiComponent from '../GoogleApiModules/GoogleApiComponent';
 import styles from './Container.css';
 import { connect } from 'react-redux';
+import { Navbar } from 'react-materialize';
 
 class Container extends React.Component {
   constructor(props) {
@@ -13,20 +13,12 @@ class Container extends React.Component {
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles.categoryFiltersBar}>
-          {this.props.categoryData.map((category, i) => {
-            return (
-              <CategoryFilters name={category.categoryName}
-                                idx={i}
-                          isPressed={category.isPressed}/>
-            );
-          })}
-          <div className={styles.blogSidebar}>
-            <BlogSidebar/>
-          </div>
-          <div className={styles.pathSidebar}>
-            <PathSidebar/>
-          </div>
+          <CategoryFilters/>
+        <div className={styles.blogSidebar}>
+          <BlogSidebar/>
+        </div>
+        <div className={styles.pathSidebar}>
+          <PathSidebar/>
         </div>
         <Map google={this.props.google}>
         {this.props.categoryData.map((category, i) => {

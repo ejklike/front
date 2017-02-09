@@ -1,7 +1,9 @@
 import React from 'react';
-import Button from 'react-button';
+//import Button from 'react-button';
+import { Button, Row, Col, Icon, Navbar, NavItem } from 'react-materialize';
 import { connect } from 'react-redux';
-import { categoryToggle } from '../../actions';
+import { categoryToggle, pathToggle } from '../../actions';
+import styles from './CategoryFilters.css';
 
 class CategoryFilters extends React.Component {
   constructor(props) {
@@ -9,21 +11,35 @@ class CategoryFilters extends React.Component {
   }
 
   render() {
-    return(
-        <Button pressed={this.props.isPressed}
-                onClick={this.props.onCategoryToggle.bind(this, this.props.idx)}>
-                { this.props.name }
-        </Button>
+    return (
+      <div>
+        <Navbar className={styles.navbar}>
+        <NavItem onClick={this.props.onPathSidebarToggle}><Icon>playlist_add</Icon></NavItem>
+        {this.props.categoryData.map((category, i) => {
+          return(
+            <NavItem class="active" onClick={this.props.onCategoryToggle.bind(this, i)}
+                         key={i}>{category.categoryName}</NavItem>
+          );
+        })}
+        </Navbar>
+      </div>
     );
   }
 }
 
-let mapDispatchToProps = (dispatch) => {
+let mapStateToProps = (state) => {
   return {
-    onCategoryToggle: (idx) => dispatch(categoryToggle(idx))
+    categoryData: state.category.categoryData
   };
 }
 
-CategoryFilters = connect(undefined, mapDispatchToProps)(CategoryFilters);
+let mapDispatchToProps = (dispatch) => {
+  return {
+    onCategoryToggle: (idx) => dispatch(categoryToggle(idx)),
+    onPathSidebarToggle: () => dispatch(pathToggle())
+  };
+}
+
+CategoryFilters = connect(mapStateToProps, mapDispatchToProps)(CategoryFilters);
 
 export default CategoryFilters;

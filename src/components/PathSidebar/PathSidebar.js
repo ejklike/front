@@ -1,6 +1,6 @@
 import React from 'react';
 //import styles from './PathSidebar.css';
-import Button from 'react-button';
+import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import { pathToggle, pathAddModeToggle } from '../../actions';
 
@@ -27,7 +27,6 @@ class PathSidebar extends React.Component {
     if(!this.props.isPathSidebarOpen) {
       this.props.onPathSidebarToggle();
     }
-    console.log("pathAddMode?",this.props.isPathAddMode);
   }
 
 	render() {
@@ -65,6 +64,7 @@ class PathSidebar extends React.Component {
 
 		return (
 				<Menu right noOverlay 
+              customBurgerIcon={false}
               isOpen={this.props.isPathSidebarOpen}
  							styles={styles}>
           {this.props.pathData.map((path, i) => {
@@ -72,8 +72,11 @@ class PathSidebar extends React.Component {
               <a id="spot" className="menu-item" href="/" key={i}>{path}</a>
             );
           })}
-          <Button onClick={this.handleClick}
-                  pressed={this.props.isPathAddMode}>
+          <Button floating large 
+                  className='red'
+                      waves='light'
+                       icon='add'
+                    onClick={this.handleClick}>
                   경로추가</Button>
 				</Menu>
 		);
