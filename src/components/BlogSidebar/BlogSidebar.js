@@ -25,42 +25,21 @@ class BlogSidebar extends React.Component {
 
 	render() {
 	  const styles = {
-			bmBurgerButton: {
-   			position: 'fixed',
-    		width: '36px',
-    		height: '30px',
-    		left: '10px',
-    		top: '10px'
- 		 	},
-  		bmBurgerBars: {
-  		 	background: '#373a47'
-  		},
 		  bmCrossButton: {
  	 			height: '24px',
     		width: '24px'
   		},
   		bmCross: {
    			background: '#bdc3c7'
-  		},
-  		bmMenu: {
-    		background: '#373a47',
-   		 	padding: '0px',
-   		 	fontSize: '1.15em'
- 		  },
- 		  bmMorphShape: {
-   			fill: '#373a47'
-  		},
-  		bmOverlay: {
-    		background: 'rgba(0, 0, 0, 0.3)'
-  		}
+  	  }
 		};
 
 		return (
 				<Menu noOverlay 
               customBurgerIcon={false}
-                isOpen={this.props.isBlogSidebarOpen}
+                        isOpen={this.props.isBlogSidebarOpen}
 												styles={styles}>
-					<a id="add" href="/">More details...</a>
+					<a id="add" href="/" className="top: '10px', left: '10px'">More details...</a>
 				</Menu>
 		);
 	}

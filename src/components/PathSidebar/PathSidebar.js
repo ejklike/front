@@ -1,6 +1,6 @@
 import React from 'react';
-//import styles from './PathSidebar.css';
-import { Button } from 'react-materialize';
+import styles from './PathSidebar.css';
+import { Button, SideNav } from 'react-materialize';
 import { connect } from 'react-redux';
 import { pathToggle, pathAddModeToggle } from '../../actions';
 
@@ -36,40 +36,32 @@ class PathSidebar extends React.Component {
   		},
   		bmCross: {
    			background: '#bdc3c7'
-  		},
-  		bmMenu: {
-    		background: '#373a47 !important',
-   		 	padding: '0px',
-   		 	fontSize: '1.15em',
- 		  },
- 		  bmMorphShape: {
-   			fill: '#373a47 !important'
-  		},
-  		bmOverlay: {
-    		background: 'rgba(0, 0, 0, 0.3)'
   		}
 		};
-
 		return (
-        <div class="teal lighten-2">
-				<Menu right noOverlay 
-              customBurgerIcon={false}
-              isOpen={this.props.isPathSidebarOpen}
- 							className={styles.menu}>
+      <div>
+        <Menu right noOverlay 
+          customBurgerIcon={false}
+                    isOpen={this.props.isPathSidebarOpen}
+                 className={styles.menu}
+                    styles={styles}>
           {this.props.pathData.map((path, i) => {
             return (
-              <a id="spot" className="menu-item" href="/" key={i}>{path}</a>
+              <div className="textAlign: center">
+                <a id="spot" className="menu-item" href="/" key={i}>{path}</a>
+              </div>
             );
           })}
-          <Button floating large 
-                  className='red'
-                      waves='light'
-                       icon='add'
-                    onClick={this.handleClick}>
-                  경로추가</Button>
-				</Menu>
-        </div>
-		);
+          <div className="textAlign: center">
+            <a id="add" className="menu-item">
+              <Button floating large className='red' waves='light' icon='add' onClick={this.handleClick}>
+                경로추가
+              </Button>
+            </a>
+          </div>
+        </Menu>
+      </div>
+    );
 	}
 }
 

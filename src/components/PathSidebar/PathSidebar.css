@@ -1,6 +1,6 @@
 .bm-cross-button {
- 	height: 24px;
-  width: 24px;
+	height: 24px;
+	width: 24px;
 }
 
 .bm-cross {
@@ -15,4 +15,8 @@
 
 .bm-morph-shape {
 	fill: #373a47;
+}
+
+.menu-item {
+	text-align: center;
 }
