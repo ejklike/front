@@ -14,7 +14,7 @@ nav {
   }
 
   color: $navbar-font-color;
-  @extend .z-depth-1;
+  @extend .z-depth-4;
   background-color: $primary-color;
   width: 100%;
   height: $navbar-height-mobile;
@@ -34,6 +34,8 @@ nav {
   .nav-wrapper {
     position: relative;
     height: 100%;
+    z-index: 9999;
+    @extend .z-depth-3;
   }
 
   @media #{$large-and-up} {

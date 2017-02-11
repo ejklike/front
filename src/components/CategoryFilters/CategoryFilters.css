@@ -1,4 +1,4 @@
 .navbar {
 	background-color: #4db6ac;
-	padding-left: 600px;
+	z-index: 3;
 }

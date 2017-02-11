@@ -73,9 +73,7 @@ class Markers extends React.Component {
         }
       });
       
-      marker.addListener('mouseover', () => {
-        marker.setOpacity(1.0);        
-        
+      marker.addListener('click', () => {
         const content = "rating: " + marker.rating + "<br>" + "name: " + marker.placeName;
 
         marker.infoWindow = new google.maps.InfoWindow({
@@ -83,24 +81,16 @@ class Markers extends React.Component {
         })
 
         marker.infoWindow.open(this.props.map, marker);
-      })
-      
-      marker.addListener('mouseout', () => {
-        marker.setOpacity(0.8);
-
-        marker.infoWindow.close(this.props.map, marker);
-      })
-
-      marker.addListener('click', () => {
-          if(this.props.isPathAddMode) {
-            this.props.onPathAdd(marker.placeName);
-            this.props.onPathAddModeToggle();
-            if(!this.props.isPathSidebarOpen) {
-              this.props.onPathSidebarToggle();
-            }
-          } else {
-            this.props.onBlogSidebarToggle();
+          
+        if(this.props.isPathAddMode) {
+          this.props.onPathAdd(marker.placeName);
+          this.props.onPathAddModeToggle();
+          if(!this.props.isPathSidebarOpen) {
+            this.props.onPathSidebarToggle();
           }
+        } else {
+          this.props.onBlogSidebarToggle();
+        }
       })
 
       if(this.props.category === "식사") {
@@ -112,6 +102,13 @@ class Markers extends React.Component {
       } else if(this.props.category === "유적") {
         this.props.historyMarkers.push(marker);
       }
+      marker.addListener('mouseover', () => {
+        marker.setOpacity(1.0);        
+      })
+      
+      marker.addListener('mouseout', () => {
+        marker.setOpacity(0.8);
+      })
     }
   }
 

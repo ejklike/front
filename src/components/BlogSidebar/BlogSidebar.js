@@ -24,23 +24,14 @@ class BlogSidebar extends React.Component {
   }
 
 	render() {
-	  const styles = {
-		  bmCrossButton: {
- 	 			height: '24px',
-    		width: '24px'
-  		},
-  		bmCross: {
-   			background: '#bdc3c7'
-  	  }
-		};
-
 		return (
+      <div className={styles.blogSidebar}>
 				<Menu noOverlay 
               customBurgerIcon={false}
-                        isOpen={this.props.isBlogSidebarOpen}
-												styles={styles}>
-					<a id="add" href="/" className="top: '10px', left: '10px'">More details...</a>
+                        isOpen={this.props.isBlogSidebarOpen}>
+					<a id="add" href="/">More details...</a>
 				</Menu>
+      </div>
 		);
 	}
 }

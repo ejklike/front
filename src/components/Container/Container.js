@@ -14,6 +14,7 @@ class Container extends React.Component {
     return (
       <div className={styles.container}>
         <CategoryFilters/>
+        <div>
         <div className={styles.blogSidebar}>
           <BlogSidebar/>
         </div>
@@ -29,6 +30,7 @@ class Container extends React.Component {
           );
         })}
         </Map>
+        </div>
       </div>
     );
   }

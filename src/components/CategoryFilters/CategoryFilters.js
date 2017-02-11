@@ -10,9 +10,13 @@ class CategoryFilters extends React.Component {
     super(props);
   }
 
+  handleClick() {
+    console.log("click!");
+  }
+
   render() {
     return (
-      <div>
+      <div className={styles.navbar}>
         <Navbar className={styles.navbar}>
         <NavItem onClick={this.props.onPathSidebarToggle}><Icon>playlist_add</Icon></NavItem>
         {this.props.categoryData.map((category, i) => {
