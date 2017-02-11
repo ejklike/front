@@ -8,7 +8,9 @@ class PlaceInfo extends React.Component {
 
 	render() {
 		return (
-
+			<div>
+				{this.props.rating}
+			</div>
 		);
 	}
 }
