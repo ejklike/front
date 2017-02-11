@@ -1,0 +1,22 @@
+.bm-cross-button {
+	height: 24px;
+	width: 24px;
+}
+
+.bm-cross {
+	background: #bdc3c7;
+}
+
+.bm-menu {
+	background: #373a47;
+ 	padding: 0px;
+ 	font-size: 1.15em;
+}
+
+.bm-morph-shape {
+	fill: #373a47;
+}
+
+.menu-item {
+	text-align: center;
+}
