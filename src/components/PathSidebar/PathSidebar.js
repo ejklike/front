@@ -1,6 +1,5 @@
 import React from 'react';
-import styles from './PathSidebar.css';
-import { Button, SideNav } from 'react-materialize';
+import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import { pathToggle, pathAddModeToggle } from '../../actions';
 

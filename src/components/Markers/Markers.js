@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 import { pathToggle, blogToggle, pathAdd, pathAddModeToggle } from '../../actions';
 
 class Markers extends React.Component {
-  constructor(props) {    
-    super(props);
-  }
- 
   componentDidMount() {
     this.setMarkers();
 
@@ -31,21 +27,21 @@ class Markers extends React.Component {
   
   setMarkers() {
     let dummies = [];
-    let imgUrl = [];
+    let imgUrl = {};
 
     if(this.props.category === "식사") {
       dummies = restaurant; 
-      imgUrl = require('../../../img/icons/restaurant.png');
+      imgUrl = './assets/img/icons/restaurant.png';
     } else if(this.props.category === "쇼핑") {
       dummies = shopping;
-      imgUrl = require('../../../img/icons/shopping.png');
+      imgUrl = './assets/img/icons/shopping.png';
     } else if(this.props.category === "유흥") {
       dummies = entertainment;
-      imgUrl = require('../../../img/icons/entertainment.png');
-   } else if(this.props.category === "유적") {
+      imgUrl = './assets/img/icons/entertainment.png';
+    } else if(this.props.category === "유적") {
       dummies = history;
-      imgUrl = require('../../../img/icons/history.png');
-  } 
+      imgUrl = './assets/img/icons/history.png';
+    } 
 
     for(var i=0; i<dummies.length; i++)
     {
@@ -57,17 +53,17 @@ class Markers extends React.Component {
         icon: imgUrl
       };
 
-      let marker = new google.maps.Marker(pref);
+      let marker = new window.google.maps.Marker(pref);
       marker.setOpacity(0.8);
 
       let request = {
         placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
       };
   
-      let service = new google.maps.places.PlacesService(this.props.map); 
+      let service = new window.google.maps.places.PlacesService(this.props.map); 
 
       service.getDetails(request, function(place, status) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
           marker.rating = place.rating;
           marker.placeName = place.name;
         }
@@ -76,7 +72,7 @@ class Markers extends React.Component {
       marker.addListener('click', () => {
         const content = "rating: " + marker.rating + "<br>" + "name: " + marker.placeName;
 
-        marker.infoWindow = new google.maps.InfoWindow({
+        marker.infoWindow = new window.google.maps.InfoWindow({
           content: content
         })
 
@@ -127,6 +123,7 @@ class Markers extends React.Component {
 
     for(var i=0; i<markers.length; i++) {
       markers[i].setMap(this.props.map);
+      console.log(markers[i]);
     }
   }
   

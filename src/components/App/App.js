@@ -5,11 +5,9 @@ import styles from './App.css';
 class App extends React.Component {
   render() {
       return(
-          <div>
-            <div className={styles.container}>
-                <Container/>
-            </div>
-          </div>
+        <div className={styles.container}>
+          <Container/>
+        </div>
       );
   }
 }

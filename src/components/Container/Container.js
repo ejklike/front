@@ -3,35 +3,25 @@ import { CategoryFilters, Map, Markers, PathSidebar, BlogSidebar } from '../';
 import GoogleApiComponent from '../GoogleApiModules/GoogleApiComponent';
 import styles from './Container.css';
 import { connect } from 'react-redux';
-import { Navbar } from 'react-materialize';
 
 class Container extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className={styles.container}>
         <CategoryFilters/>
-        <div>
-        <div className={styles.blogSidebar}>
-          <BlogSidebar/>
-        </div>
-        <div className={styles.pathSidebar}>
-          <PathSidebar/>
-        </div>
-        <Map google={this.props.google}>
-        {this.props.categoryData.map((category, i) => {
-          return (
-            <Markers category={category.categoryName}
-                         idx={i}
-                    isPressed={category.isPressed}/>
-          );
-        })}
+        <BlogSidebar/>
+        <PathSidebar/>
+        <Map google={window.google}>
+          {this.props.categoryData.map((category, i) => {
+            return (
+              <Markers category={category.categoryName}
+                            idx={i}
+                            key={i}
+                      isPressed={category.isPressed}/>
+            );  
+          })}
         </Map>
-        </div>
-      </div>
+       </div>
     );
   }
 }

@@ -1,6 +1,6 @@
 let counter = 0;
 let scriptMap = new Map();
-
+console.log("!!");
 export const ScriptCache = (function(global) {
   return function ScriptCache (scripts) {
     const Cache = {}

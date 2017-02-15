@@ -1,22 +1,14 @@
 import React from 'react';
 //import Button from 'react-button';
-import { Button, Row, Col, Icon, Navbar, NavItem, Input } from 'react-materialize';
+import { Navbar, NavItem, Icon } from 'react-materialize';
 import { connect } from 'react-redux';
 import { categoryToggle, pathToggle } from '../../actions';
 import styles from './CategoryFilters.css';
 
 class CategoryFilters extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  handleClick() {
-    console.log("click!");
-  }
-
   render() {
     return (
-      <div className={styles.navbar}>
+      <div>
         <Navbar className={styles.navbar}>
         <NavItem onClick={this.props.onPathSidebarToggle}><Icon>playlist_add</Icon></NavItem>
         {this.props.categoryData.map((category, i) => {

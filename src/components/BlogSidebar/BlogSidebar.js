@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './BlogSidebar.css';
 import { connect } from 'react-redux';
 
 var Menu = require('react-burger-menu').slide;

@@ -4,12 +4,8 @@ import styles from './Map.css';
 import mapStyles from './mapStyles2.json';
 
 class Map extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.google !== this.props.google) {
+  componentDidUpdate(prevProps) {
+    if(this.props.google !== prevProps.google) {
       this.loadMap();
     }
   }
