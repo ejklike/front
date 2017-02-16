@@ -1,6 +1,6 @@
 #Front
 
-### Dependancies
+### Dependencies
 * npm
 * yarn : `npm install yarn`
 
