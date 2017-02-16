@@ -1,23 +1,16 @@
 #Front
 
-1. git clone을 해옵니다.
+### Dependancies
+* npm
+* yarn : `npm install yarn`
 
-  `    
-  $git clone https://github.com/WhereToday/front.git
-  `
+### How to run
+1. 패키지 설치: `yarn install`
+1. 개발 환경 테스트: `yarn start`
+1. 배포판 빌드: `yarn build`
 
-2. package.json 을  참고해서 의존성 모듈을 모두 설치합니다.
+cf. 위의 명령들은 npm으로도 동일하게 실행 가능
 
-* dependencies 모듈들
-
-  `
-  $npm install --save [모듈명]
-  `
-
-* devDependencies 모듈들
-
-  `
-  $npm install --save-dev [모듈명]
-  `
-
-3. 개발 상황을 확인해볼 포트 번호를 설정해줍니다.
+### How to add dependancies
+* dev dependancies: `yarn add [package name] -D`
+* dependancies: `yarn add [package name]`
