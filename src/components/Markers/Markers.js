@@ -36,11 +36,40 @@ class Markers extends React.Component {
     }
   }
 
+  calculateTransit(src, dest) {
+    let directionsService = new window.google.maps.DirectionsService;
+    let directionsDisplay = new window.google.maps.DirectionsRenderer;
+    directionsDisplay.setMap(this.props.map);
+
+    console.log("src", src);
+    console.log("dest", dest);
+    directionsService.route({
+      origin: src,
+      destination: dest,
+      travelMode: window.google.maps.TravelMode.DRIVING
+    }, function(response, status) {
+      if (status === window.google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+      } else {
+      window.alert('Directions request failed due to ' + status);
+      }
+    });
+  }
+
   handlePathAdd(marker) {
     if(this.props.pathData.length > 0) {
-      this.props.onPathAdd("소요시간: ???");
+      this.calculateTransit(this.props.pathData[this.props.pathData.length-1].placeID, marker.placeID);
+      this.props.onPathAdd({
+        car: 0,
+        walk: 0,
+        subway: 0,
+        bus: 0
+      });
     }
-    this.props.onPathAdd(marker.placeName);
+    this.props.onPathAdd({
+      placeName: marker.placeName,
+      placeID: marker.placeID
+    });
   }
 
   setMarkers() {
@@ -69,7 +98,8 @@ class Markers extends React.Component {
           lat: dummies[i].lat,
           lng: dummies[i].lng
         },
-        icon: imgUrl
+        icon: imgUrl,
+        placeID: dummies[i].place_id
       };
 
       let marker = new window.google.maps.Marker(pref);
@@ -79,13 +109,12 @@ class Markers extends React.Component {
         placeId: dummies[i].place_id
       };
   
-      let service = new window.google.maps.places.PlacesService(this.props.map); 
+      let placesService = new window.google.maps.places.PlacesService(this.props.map); 
 
-      service.getDetails(request, function(place, status) {
+      placesService.getDetails(request, function(place, status) {
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
           marker.placeName = place.name;
           marker.rating = place.rating;
-          marker.placeID = place.place_id;
         }
       });
       
@@ -161,7 +190,8 @@ let mapDispatchToProps = (dispatch) => {
     onBlogSidebarToggle: () => dispatch(blogToggle()),
     onPathAdd: (spot) => dispatch(pathAdd(spot)),
     onPathAddModeToggle: () => dispatch(pathAddModeToggle()),
-    onSelectedMarkerChange: (markerID) => dispatch(selectedMarkerChange(markerID))
+    onSelectedMarkerChange: (markerID) => dispatch(selectedMarkerChange(markerID)),
+    onTransitAdd: (transit) => dispatch(transitAdd(transit))
   };
 }
 
