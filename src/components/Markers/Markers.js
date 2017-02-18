@@ -7,7 +7,7 @@ import entertainment from './entertainment.json';
 import history from './history.json';
 import { PlaceInfo } from '../'
 import { connect } from 'react-redux';
-import { pathToggle, blogToggle, pathAdd, pathAddModeToggle } from '../../actions';
+import { pathToggle, blogToggle, pathAdd, pathAddModeToggle, selectedMarkerChange } from '../../actions';
 
 class Markers extends React.Component {
   constructor(props) {
@@ -84,6 +84,7 @@ class Markers extends React.Component {
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
           marker.placeName = place.name;
           marker.rating = place.rating;
+          marker.placeID = place.place_id;
         }
       });
       
@@ -94,13 +95,21 @@ class Markers extends React.Component {
         window.infoWindow.setContent(content);
         window.infoWindow.open(this.props.map, marker);
 
-        if(!this.props.isBlogSidebarOpen && !this.props.isPathAddMode) {
-          this.props.onBlogSidebarToggle();
-        } 
-
-        if(this.props.isPathAddMode) {
+        if(!this.props.isPathAddMode) {
+          if(!this.props.isBlogSidebarOpen) {
+            this.props.onBlogSidebarToggle();
+            this.props.onSelectedMarkerChange(marker.placeID);
+          } else {
+            if(this.props.selectedMarker === marker.placeID) {
+              console.log(this.props.selectedMarker, marker.placeID);
+              this.props.onBlogSidebarToggle();
+            } 
+          }
+        } else {
           this.handlePathAdd(marker);
         }
+
+        this.props.onSelectedMarkerChange(marker.placeID);
       })
 
       marker.addListener('mouseover', () => {
@@ -140,7 +149,8 @@ let mapStateToProps = (state) => {
     isPathSidebarOpen: state.pathSidebar.isPathSidebarOpen,
     isBlogSidebarOpen: state.blogSidebar.isBlogSidebarOpen,
     isPathAddMode: state.pathSidebar.isPathAddMode,
-    pathData: state.pathSidebar.pathData
+    pathData: state.pathSidebar.pathData,
+    selectedMarker: state.markers.selectedMarker
   };
 }
 
@@ -150,6 +160,7 @@ let mapDispatchToProps = (dispatch) => {
     onBlogSidebarToggle: () => dispatch(blogToggle()),
     onPathAdd: (spot) => dispatch(pathAdd(spot)),
     onPathAddModeToggle: () => dispatch(pathAddModeToggle()),
+    onSelectedMarkerChange: (markerID) => dispatch(selectedMarkerChange(markerID))
   };
 }
 

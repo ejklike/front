@@ -24,16 +24,6 @@ class BlogSidebar extends React.Component {
   }
 
 	render() {
-		const styles = {
-		  bmCrossButton: {
- 	 			height: '24px',
-    		width: '24px'
-  		},
-  		bmCross: {
-   			background: '#bdc3c7'
-  		}
-		};
-
 		return (
       <div className={styles.blogSidebar}>
 				<Menu noOverlay 

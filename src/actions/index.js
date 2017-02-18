@@ -4,6 +4,7 @@ export const BLOG_TOGGLE = 'BLOG_TOGGLE';
 export const PATH_ADD = 'PATH_ADD';
 export const PATH_ADD_MODE_TOGGLE = 'PATH_ADD_MODE_TOGGLE';
 export const CONTENT_CHANGE = 'CONTENT_CHANGE';
+export const SELECTED_MARKER_CHANGE = 'SELECTED_MARKER_CHANGE';
 
 export function categoryToggle(key) {
   return {
@@ -34,5 +35,12 @@ export function pathAdd(spot) {
   return {
     type: PATH_ADD,
     spot: spot
+  };
+}
+
+export function selectedMarkerChange(selectedMarker) {
+  return {
+    type: SELECTED_MARKER_CHANGE,
+    selectedMarker: selectedMarker
   };
 }
