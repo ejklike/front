@@ -1,4 +1,4 @@
-import { CATEGORY_TOGGLE, PATH_TOGGLE, BLOG_TOGGLE, PATH_ADD, PATH_ADD_MODE_TOGGLE, SELECTED_MARKER_CHANGE } from '../actions';
+import { CATEGORY_TOGGLE, PATH_TOGGLE, BLOG_TOGGLE, PATH_ADD, PATH_ADD_MODE_TOGGLE, SELECTED_MARKER_CHANGE, TRANSIT_ADD } from '../actions';
 import { combineReducers } from 'redux';
 import update from '../../node_modules/react-addons-update';
 
@@ -18,7 +18,8 @@ const blogSidebarInitialState = {
 const pathSidebarInitialState = {
   isPathSidebarOpen: false,
   isPathAddMode: false,
-  pathData: []
+  pathData: [],
+  transitData: []
 }
 
 const markersInitialState = {
@@ -68,6 +69,12 @@ const pathSidebar = (state = pathSidebarInitialState, action) => {
       return update(state, {
         pathData: {
           $push: [action.spot]
+        }
+      })
+    case TRANSIT_ADD:
+      return update(state, {
+        transitData: {
+          $push: [action.transit]
         }
       })
     case PATH_ADD_MODE_TOGGLE:

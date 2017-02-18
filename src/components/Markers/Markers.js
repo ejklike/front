@@ -7,7 +7,7 @@ import entertainment from './entertainment.json';
 import history from './history.json';
 import { PlaceInfo } from '../'
 import { connect } from 'react-redux';
-import { pathToggle, blogToggle, pathAdd, pathAddModeToggle, selectedMarkerChange } from '../../actions';
+import { pathToggle, blogToggle, pathAdd, transitAdd, pathAddModeToggle, selectedMarkerChange } from '../../actions';
 
 class Markers extends React.Component {
   constructor(props) {
@@ -61,12 +61,13 @@ class Markers extends React.Component {
       imgUrl = './assets/img/icons/history.png';
     } 
 
+    console.log(this.props.category, dummies);
     for(var i=0; i<dummies.length; i++)
     {
       let pref = {
         position: {
-          lat: dummies[i].pos.lat,
-          lng: dummies[i].pos.lng
+          lat: dummies[i].lat,
+          lng: dummies[i].lng
         },
         icon: imgUrl
       };
@@ -75,7 +76,7 @@ class Markers extends React.Component {
       marker.setOpacity(0.8);
 
       let request = {
-        placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
+        placeId: dummies[i].place_id
       };
   
       let service = new window.google.maps.places.PlacesService(this.props.map); 
