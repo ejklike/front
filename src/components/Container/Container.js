@@ -15,13 +15,13 @@ class Container extends React.Component {
           {this.props.categoryData.map((category, i) => {
             return (
               <Markers category={category.categoryName}
-                            idx={i}
                             key={i}
+                            idx={i}
                       isPressed={category.isPressed}/>
             );  
           })}
         </Map>
-       </div>
+      </div>
     );
   }
 }

@@ -14,6 +14,7 @@ class CategoryFilters extends React.Component {
         {this.props.categoryData.map((category, i) => {
           return(
             <NavItem onClick={this.props.onCategoryToggle.bind(this, i)}
+                   className={category.isPressed ? "active": ""}
                          key={i}>{category.categoryName}</NavItem>
           );
         })}

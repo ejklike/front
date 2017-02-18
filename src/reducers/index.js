@@ -1,4 +1,4 @@
-import { CATEGORY_TOGGLE, PATH_TOGGLE, BLOG_TOGGLE, PATH_ADD, PATH_ADD_MODE_TOGGLE } from '../actions';
+import { CATEGORY_TOGGLE, PATH_TOGGLE, BLOG_TOGGLE, PATH_ADD, PATH_ADD_MODE_TOGGLE, SELECTED_MARKER_CHANGE, TRANSIT_ADD } from '../actions';
 import { combineReducers } from 'redux';
 import update from '../../node_modules/react-addons-update';
 
@@ -18,16 +18,21 @@ const blogSidebarInitialState = {
 const pathSidebarInitialState = {
   isPathSidebarOpen: false,
   isPathAddMode: false,
-  pathData: []
+  pathData: [],
+  transitData: []
+}
+
+const markersInitialState = {
+  selectedMarker: ''
 }
 
 const category = (state = categoryInitialState, action) => {
   switch(action.type) {
     case CATEGORY_TOGGLE:
-      const isPressed = state.categoryData[action.idx].isPressed;
+      const isPressed = state.categoryData[action.key].isPressed;
       return update(state, {
         categoryData: {
-          [action.idx]: {
+          [action.key]: {
             isPressed: {
               $set: !isPressed
             }
@@ -66,6 +71,12 @@ const pathSidebar = (state = pathSidebarInitialState, action) => {
           $push: [action.spot]
         }
       })
+    case TRANSIT_ADD:
+      return update(state, {
+        transitData: {
+          $push: [action.transit]
+        }
+      })
     case PATH_ADD_MODE_TOGGLE:
       isPathAddMode = state.isPathAddMode;
       return Object.assign({}, state, {
@@ -76,10 +87,22 @@ const pathSidebar = (state = pathSidebarInitialState, action) => {
   }
 }
 
+const markers =  (state = markersInitialState, action) => {
+  switch(action.type) {
+    case SELECTED_MARKER_CHANGE: 
+      return Object.assign({}, state, {
+        selectedMarker: action.selectedMarker
+      })
+    default:
+      return state
+  }
+}  
+
 const whereTodayApp = combineReducers({ 
   category,
   blogSidebar,
-  pathSidebar
+  pathSidebar,
+  markers
 });
 
 export default whereTodayApp;

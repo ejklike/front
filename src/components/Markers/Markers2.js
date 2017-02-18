@@ -1,23 +1,12 @@
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import update from '../../../node_modules/react-addons-update';
 import restaurant from './restaurant.json';
 import shopping from './shopping.json';
 import entertainment from './entertainment.json';
 import history from './history.json';
-import { PlaceInfo } from '../'
 import { connect } from 'react-redux';
-import { pathToggle, blogToggle, pathAdd, transitAdd, pathAddModeToggle, selectedMarkerChange } from '../../actions';
+import { pathToggle, blogToggle, pathAdd, pathAddModeToggle } from '../../actions';
 
 class Markers extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      markers: []
-    }
-  }
-
   componentDidMount() {
     this.setMarkers();
 
@@ -35,14 +24,7 @@ class Markers extends React.Component {
       }
     }
   }
-
-  handlePathAdd(marker) {
-    if(this.props.pathData.length > 0) {
-      this.props.onPathAdd("소요시간: ???");
-    }
-    this.props.onPathAdd(marker.placeName);
-  }
-
+  
   setMarkers() {
     let dummies = [];
     let imgUrl = {};
@@ -61,13 +43,12 @@ class Markers extends React.Component {
       imgUrl = './assets/img/icons/history.png';
     } 
 
-    console.log(this.props.category, dummies);
     for(var i=0; i<dummies.length; i++)
     {
       let pref = {
         position: {
-          lat: dummies[i].lat,
-          lng: dummies[i].lng
+          lat: dummies[i].pos.lat,
+          lng: dummies[i].pos.lng
         },
         icon: imgUrl
       };
@@ -76,43 +57,48 @@ class Markers extends React.Component {
       marker.setOpacity(0.8);
 
       let request = {
-        placeId: dummies[i].place_id
+        placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
       };
   
       let service = new window.google.maps.places.PlacesService(this.props.map); 
 
       service.getDetails(request, function(place, status) {
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-          marker.placeName = place.name;
           marker.rating = place.rating;
-          marker.placeID = place.place_id;
+          marker.placeName = place.name;
         }
       });
       
       marker.addListener('click', () => {
-        const content = ReactDOMServer.renderToString(
-          <PlaceInfo name={marker.placeName} rating={marker.rating}/>)
+        const content = "rating: " + marker.rating + "<br>" + "name: " + marker.placeName;
 
-        window.infoWindow.setContent(content);
-        window.infoWindow.open(this.props.map, marker);
+        marker.infoWindow = new window.google.maps.InfoWindow({
+          content: content
+        })
 
-        if(!this.props.isPathAddMode) {
-          if(!this.props.isBlogSidebarOpen) {
-            this.props.onBlogSidebarToggle();
-            this.props.onSelectedMarkerChange(marker.placeID);
-          } else {
-            if(this.props.selectedMarker === marker.placeID) {
-              console.log(this.props.selectedMarker, marker.placeID);
-              this.props.onBlogSidebarToggle();
-            } 
+        marker.infoWindow.open(this.props.map, marker);
+          
+        if(this.props.isPathAddMode) {
+          this.props.onPathAdd(marker.placeName);
+          this.props.onPathAddModeToggle();
+          if(!this.props.isPathSidebarOpen) {
+            this.props.onPathSidebarToggle();
           }
         } else {
-          this.handlePathAdd(marker);
+          this.props.onBlogSidebarToggle();
         }
-
-        this.props.onSelectedMarkerChange(marker.placeID);
       })
 
+      this.props.categoryMarkers.push(marker);
+      /*if(this.props.category === "식사") {
+        this.props.restaurantMarkers.push(marker);
+      } else if(this.props.category === "쇼핑") {
+        this.props.shoppingMarkers.push(marker);
+      } else if(this.props.category === "유흥") {
+        this.props.entertainmentMarkers.push(marker);
+      } else if(this.props.category === "유적") {
+        this.props.historyMarkers.push(marker);
+      }*/
       marker.addListener('mouseover', () => {
         marker.setOpacity(1.0);        
       })
@@ -120,28 +106,49 @@ class Markers extends React.Component {
       marker.addListener('mouseout', () => {
         marker.setOpacity(0.8);
       })
-
-      this.setState({
-        markers: update(
-          this.state.markers, { $push: [marker] })
-      });
     }
   }
 
   showMarkers() {
-    for(var i=0; i<this.state.markers.length; i++) {
-      this.state.markers[i].setMap(this.props.map);
+    /*
+    let markers = [];
+
+    if(this.props.category === "식사") {
+      markers = this.props.restaurantMarkers; 
+    } else if(this.props.category === "쇼핑") {
+      markers = this.props.shoppingMarkers;
+    } else if(this.props.category === "유흥") {
+      markers = this.props.entertainmentMarkers;
+    } else if(this.props.category === "유적") {
+      markers = this.props.historyMarkers;
+    }*/ 
+
+    
+    for(var i=0; i<this.props.categoryMarkers.length; i++) {
+      this.props.categoryMarkers[i].setMap(this.props.map);
     }
   }
   
   hideMarkers() {
-    for(var i=0; i<this.state.markers.length; i++) {
-      this.state.markers[i].setMap(null);
+   /* let markers = [];
+
+    if(this.props.category === "식사") {
+      markers = this.props.restaurantMarkers; 
+    } else if(this.props.category === "쇼핑") {
+      markers = this.props.shoppingMarkers;
+    } else if(this.props.category === "유흥") {
+      markers = this.props.entertainmentMarkers;
+    } else if(this.props.category === "유적") {
+      markers = this.props.historyMarkers;
+    }
+*/
+    for(var i=0; i<this.props.categoryMarkers.length; i++) {
+      categoryMarkers[i].setMap(null);
     }
   } 
    
   render() {
-    return null;
+    return null; 
   }
 }
 
@@ -149,9 +156,7 @@ let mapStateToProps = (state) => {
   return {
     isPathSidebarOpen: state.pathSidebar.isPathSidebarOpen,
     isBlogSidebarOpen: state.blogSidebar.isBlogSidebarOpen,
-    isPathAddMode: state.pathSidebar.isPathAddMode,
-    pathData: state.pathSidebar.pathData,
-    selectedMarker: state.markers.selectedMarker
+    isPathAddMode: state.pathSidebar.isPathAddMode
   };
 }
 
@@ -160,11 +165,14 @@ let mapDispatchToProps = (dispatch) => {
     onPathSidebarToggle: () => dispatch(pathToggle()),
     onBlogSidebarToggle: () => dispatch(blogToggle()),
     onPathAdd: (spot) => dispatch(pathAdd(spot)),
-    onPathAddModeToggle: () => dispatch(pathAddModeToggle()),
-    onSelectedMarkerChange: (markerID) => dispatch(selectedMarkerChange(markerID))
+    onPathAddModeToggle: () => dispatch(pathAddModeToggle())
   };
 }
 
 Markers = connect(mapStateToProps, mapDispatchToProps)(Markers);
+
+Markers.defaultProps = {
+  categoryMarkers: []
+};
 
 export default Markers;

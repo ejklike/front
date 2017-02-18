@@ -53,9 +53,7 @@ class PathSidebar extends React.Component {
           })}
           <div className="textAlign: center">
             <a id="add" className="menu-item">
-              <Button floating large className='red' waves='light' icon='add' onClick={this.handleClick}>
-                경로추가
-              </Button>
+              <Button floating className='red' waves='light' icon='add' onClick={this.handleClick}/>
             </a>
           </div>
         </Menu>
