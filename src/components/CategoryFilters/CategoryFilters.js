@@ -1,6 +1,6 @@
 import React from 'react';
 //import Button from 'react-button';
-import { Navbar, NavItem, Icon } from 'react-materialize';
+import { Navbar, NavItem, Icon, Input } from 'react-materialize';
 import { connect } from 'react-redux';
 import { categoryToggle, pathToggle } from '../../actions';
 import styles from './CategoryFilters.css';

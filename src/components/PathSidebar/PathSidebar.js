@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import { pathToggle, pathAddModeToggle } from '../../actions';
+import { PathItem } from '../';
 
 var Menu = require('react-burger-menu').slide;
 
@@ -38,6 +39,7 @@ class PathSidebar extends React.Component {
   		}
 		};
 		return (
+
       <div>
         <Menu right noOverlay 
           customBurgerIcon={false}
@@ -47,15 +49,10 @@ class PathSidebar extends React.Component {
           {this.props.pathData.map((path, i) => {
             return (
               <div className="textAlign: center">
-                <a id="spot" className="menu-item" href="/" key={i}>{path}</a>
+                <PathItem idx={i} key={i} path={path}/>
               </div>
             );
           })}
-          <div className="textAlign: center">
-            <a id="add" className="menu-item">
-              <Button floating className='red' waves='light' icon='add' onClick={this.handleClick}/>
-            </a>
-          </div>
         </Menu>
       </div>
     );

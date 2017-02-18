@@ -18,8 +18,7 @@ const blogSidebarInitialState = {
 const pathSidebarInitialState = {
   isPathSidebarOpen: false,
   isPathAddMode: false,
-  pathData: [],
-  transitData: []
+  pathData: []
 }
 
 const markersInitialState = {
@@ -69,12 +68,6 @@ const pathSidebar = (state = pathSidebarInitialState, action) => {
       return update(state, {
         pathData: {
           $push: [action.spot]
-        }
-      })
-    case TRANSIT_ADD:
-      return update(state, {
-        transitData: {
-          $push: [action.transit]
         }
       })
     case PATH_ADD_MODE_TOGGLE:

@@ -39,13 +39,6 @@ export function pathAdd(spot) {
   };
 }
 
-export function transitAdd(transit) {
-  return {
-    type: TRANSIT_ADD,
-    transit: transit
-  }
-}
-
 export function selectedMarkerChange(selectedMarker) {
   return {
     type: SELECTED_MARKER_CHANGE,
