@@ -40,14 +40,19 @@ class Markers extends React.Component {
     let directionsService = new window.google.maps.DirectionsService;
     let directionsDisplay = new window.google.maps.DirectionsRenderer;
     directionsDisplay.setMap(this.props.map);
+    directionsDisplay.setOptions({
+      suppressMarkers: true,
+      preserveViewport: true
+    });
 
-    console.log("src", src);
-    console.log("dest", dest);
-    directionsService.route({
-      origin: src,
-      destination: dest,
+    let request = {
+      origin: {placeId: src},
+      destination: {placeId: dest},
       travelMode: window.google.maps.TravelMode.DRIVING
-    }, function(response, status) {
+    };
+
+    directionsService.route(request, function(response, status) {
+      console.log("response", response);
       if (status === window.google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
       } else {
@@ -91,6 +96,7 @@ class Markers extends React.Component {
     } 
 
     console.log(this.props.category, dummies);
+    
     for(var i=0; i<dummies.length; i++)
     {
       let pref = {

@@ -47,18 +47,12 @@ class PathSidebar extends React.Component {
                  className={styles.menu}
                     styles={styles}>
           {this.props.pathData.map((path, i) => {
-            console.log(i, path);
             return (
               <div className="textAlign: center">
                 <PathItem idx={i} key={i} path={path}/>
               </div>
             );
           })}
-          <div className="textAlign: center">
-            <a id="add" className="menu-item">
-              <Button floating className='red' waves='light' icon='add' onClick={this.handleClick}/>
-            </a>
-          </div>
         </Menu>
       </div>
     );
