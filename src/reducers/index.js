@@ -24,10 +24,10 @@ const pathSidebarInitialState = {
 const category = (state = categoryInitialState, action) => {
   switch(action.type) {
     case CATEGORY_TOGGLE:
-      const isPressed = state.categoryData[action.idx].isPressed;
+      const isPressed = state.categoryData[action.key].isPressed;
       return update(state, {
         categoryData: {
-          [action.idx]: {
+          [action.key]: {
             isPressed: {
               $set: !isPressed
             }

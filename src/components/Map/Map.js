@@ -37,6 +37,10 @@ class Map extends React.Component {
       this.map.mapTypes.set('map_style', styledMap);
       this.map.setMapTypeId('map_style');
 
+      window.infoWindow = new window.google.maps.InfoWindow({
+        content: ''
+      });
+      
       console.log("load map");
     }
 	}

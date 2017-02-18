@@ -1993,7 +1993,7 @@ a {
 .z-depth-2 {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3); }
 
-.z-depth-3, nav .nav-wrapper {
+.z-depth-3 {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
 
 .z-depth-4, nav, .modal {
@@ -2541,7 +2541,7 @@ nav ul a span.badge {
 .row {
   margin-left: auto;
   margin-right: auto;
-  padding: 20px; }
+  margin-bottom: 20px; }
   .row:after {
     content: "";
     display: table;
@@ -2977,8 +2977,7 @@ nav {
     line-height: 56px; }
   nav .nav-wrapper {
     position: relative;
-    height: 100%;
-    z-index: 9999; }
+    height: 100%; }
   @media only screen and (min-width: 993px) {
     nav a.button-collapse {
       display: none; } }

@@ -3,11 +3,12 @@ export const PATH_TOGGLE = 'PATH_TOGGLE';
 export const BLOG_TOGGLE = 'BLOG_TOGGLE';
 export const PATH_ADD = 'PATH_ADD';
 export const PATH_ADD_MODE_TOGGLE = 'PATH_ADD_MODE_TOGGLE';
+export const CONTENT_CHANGE = 'CONTENT_CHANGE';
 
-export function categoryToggle(idx) {
+export function categoryToggle(key) {
   return {
     type: CATEGORY_TOGGLE,
-     idx: idx
+    key: key
   };
 }
 
