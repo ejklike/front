@@ -20,14 +20,13 @@ class Markers extends React.Component {
 
   componentDidMount() {
     this.setMarkers();
-
-    if(this.props.isPressed) {
-      this.showMarkers();
-    }
+    console.log('markers : ',this.state.markers);
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.isPressed !== prevProps.isPressed) {
+    console.log('Component Did Update : ',this.state.markers);
+    console.log('Props : ',this.props,prevProps);
+    if(this.props.isPressed !== prevProps.isPressed || this.props === prevProps) {
       if(this.props.isPressed) {
         this.showMarkers();
       } else {
@@ -89,6 +88,7 @@ class Markers extends React.Component {
         }
       });
       
+      console.log('requst is : ',request);
       marker.addListener('click', () => {
         const content = ReactDOMServer.renderToString(
           <PlaceInfo name={marker.placeName} rating={marker.rating}/>)
@@ -129,6 +129,7 @@ class Markers extends React.Component {
   }
 
   showMarkers() {
+    console.log(this.state.markers);
     for(var i=0; i<this.state.markers.length; i++) {
       this.state.markers[i].setMap(this.props.map);
     }
