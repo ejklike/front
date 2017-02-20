@@ -1,58 +1,59 @@
 import React from 'react';
-import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import { pathToggle, pathAddModeToggle } from '../../actions';
 import { PathItem } from '../';
+import styles from './PathSidebar.css';
 
 var Menu = require('react-burger-menu').slide;
+var Button = require('react-button');
+
+var themes = Button.themes;
+themes.default.style = {
+  width: '260px',
+  height: '30px'
+}
+themes.default.overStyle = {
+  background: '#4db6ac'
+}
+themes.default.pressedStyle = {
+  background: '#4db6ac'
+}
+themes.default.overPressedStyle = {
+  background: '#55c6bc'
+}
+themes.default.activeStyle = {
+  background: '#4db6ac'
+}
+themes.default.activePressedStyle = {
+  background: '#4db6ac'
+}
 
 class PathSidebar extends React.Component {
   constructor(props) {
 	  super(props);
-
-    this.handleClick = this.handleClick.bind(this);
 	}
 
-	 componentDidUpdate(prevProps) {
-		if((this.props.isPathSidebarOpen !== prevProps.isPathSidebarOpen) 
-      || (this.props.pathData.length !== prevProps.pathData.length)) {
-			return true;
-		}
-		return false;
-	}
-
-  handleClick() {
-    this.props.onPathAddModeToggle();
-    if(!this.props.isPathSidebarOpen) {
-      this.props.onPathSidebarToggle();
-    }
+  shouldComponentUpdate(nextProps) {
+    if(this.props.pathData.length !== nextProps.pathData.length
+      || this.props.isPathSidebarOpen !== nextProps.isPathSidebarOpen
+      || this.props.isPathAddMode !== nextProps.isPathAddMode) return true;
+    return false;
   }
 
-	render() {
-	  const styles = {
-		  bmCrossButton: {
- 	 			height: '24px',
-    		width: '24px'
-  		},
-  		bmCross: {
-   			background: '#bdc3c7'
-  		}
-		};
+  render() {
 		return (
-
-      <div>
+      <div className="textAlign: center">
         <Menu right noOverlay 
           customBurgerIcon={false}
                     isOpen={this.props.isPathSidebarOpen}
-                 className={styles.menu}
                     styles={styles}>
           {this.props.pathData.map((path, i) => {
             return (
-              <div className="textAlign: center">
-                <PathItem idx={i} key={i} path={path}/>
-              </div>
+              <PathItem idx={i} key={i} path={path}/>
             );
           })}
+          <Button onClick={this.props.onPathAddModeToggle}
+                  pressed={this.props.isPathAddMode}>경로 추가</Button>
         </Menu>
       </div>
     );
@@ -73,7 +74,6 @@ let mapDispatchToProps = (dispatch) => {
     onPathAddModeToggle: () => dispatch(pathAddModeToggle())
   };
 }
-
 
 PathSidebar = connect(mapStateToProps, mapDispatchToProps)(PathSidebar);
 

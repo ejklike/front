@@ -38,24 +38,20 @@ class BlogSidebar extends React.Component {
   }
 
   getDetailOfMarker(place_id) {
+  	if(this.props.map) {
+    	let service = new window.google.maps.places.PlacesService(this.props.map); 
 
-    if(this.props.map) {
-    console.log('MAPMAPMAP',this.props.map);
-      let service = new window.google.maps.places.PlacesService(this.props.map); 
+   		let request = {
+      	placeId: place_id
+    	};
 
-      let request = {
-        placeId: place_id
-      };
-
-      var result = {};
-
-      service.getDetails(request, (place, status) => {
-        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-          this.getDetail(place);
-        }
-      });
-    }
-  }
+ 	   service.getDetails(request, (place, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        this.getDetail(place);
+      }
+    });
+ 	 }
+  } 
 
 	render() {
 		return (
