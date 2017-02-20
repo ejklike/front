@@ -34,6 +34,7 @@ class BlogSidebar extends React.Component {
     this.setState({
       detail: place
     });
+    console.log('detail : ',this.state.detail);
   }
 
   getDetailOfMarker(place_id) {
@@ -59,11 +60,9 @@ class BlogSidebar extends React.Component {
               customBurgerIcon={false}
               isOpen={this.props.isBlogSidebarOpen}
               styles={styles}>
-              {this.state.detail ? (
-                <DetailInfo detail={this.state.detail} />
-              ) : (
-                <p>Nothing yet </p>
-              )}
+                {Object.keys(this.state.detail).length !== 0 &&  console.log('yes')}
+                {Object.keys(this.state.detail).length !== 0 &&
+                  <DetailInfo detail={this.state.detail} />}
 				</Menu>
       </div>
 		);
