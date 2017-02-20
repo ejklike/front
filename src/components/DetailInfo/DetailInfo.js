@@ -42,15 +42,11 @@ class DetailInfo extends React.Component {
           <div className={detailStyles}>
             <a target="_blank" href={this.props.detail.website ? this.props.detail.website : '/'}>{this.props.detail.name}</a>
             <div id="storeInfo">
-              <img src={this.props.detail.photos ? this.props.detail.photos[0].getUrl({'maxWidth':200,'maxHeight':400}) : img} />
-              <p className="menu-item"> Phone : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</p>
+              <img width="300" height="200" src={this.props.detail.photos ? this.props.detail.photos[0].getUrl({'width':500,'maxHeight':500}) : img} />
+              <p className="menu-item"> 전화번호 : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</p>
               <div id="opening_hours">
-                Open : {this.props.detail.opening_hours ? (
-                  this.props.detail.opening_hours.open_now ? 
-                    <a className="menu-item" onClick={this.onClick} href='#' >true</a> : 
-                    <a className="menu-item" onClick={this.onClick} href='#' >false</a> ) : (
-                  'None'
-                )}
+                {this.props.detail.opening_hours &&
+                  <a className="menu-item" onClick={this.onClick} href='#' >운영 시간 보기</a>}
               <br />
                 {this.state.showOpeningHours && 
                   this.props.detail.opening_hours.weekday_text && 

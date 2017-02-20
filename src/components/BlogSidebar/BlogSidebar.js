@@ -21,7 +21,6 @@ class BlogSidebar extends React.Component {
     if(prevProps.selectedMarker !== this.props.selectedMarker){
       this.getDetailOfMarker(this.props.selectedMarker);
     } 
-    console.log('detail : ',this.state.detail);
   }
 
 	shoulComponentUpdate(nextProps) {
