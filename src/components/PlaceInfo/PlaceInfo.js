@@ -9,12 +9,22 @@ class PlaceInfo extends React.Component {
   }
 
   render() {
-    return (
-      <p>
-        {this.props.name}
-        {this.props.rating}
-      </p>
-    );
+    if (this.props.price_level === null) {
+      return (
+        <div>
+          <strong>{this.props.name}</strong><br />
+          rating: {this.props.rating}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <strong>{this.props.name}</strong><br />
+          rating: {this.props.rating}<br />
+          price level: {this.props.price_level}
+        </div>
+      );
+    }
   }
 }
 
