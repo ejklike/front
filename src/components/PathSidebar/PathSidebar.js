@@ -3,17 +3,16 @@ import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import { pathToggle, pathAddModeToggle } from '../../actions';
 import { PathItem } from '../';
+import styles from './PathSidebar.css';
 
 var Menu = require('react-burger-menu').slide;
 
 class PathSidebar extends React.Component {
   constructor(props) {
 	  super(props);
-
-    this.handleClick = this.handleClick.bind(this);
 	}
 
-	 componentDidUpdate(prevProps) {
+	 shouldComponentUpdate(prevProps) {
 		if((this.props.isPathSidebarOpen !== prevProps.isPathSidebarOpen) 
       || (this.props.pathData.length !== prevProps.pathData.length)) {
 			return true;
@@ -23,36 +22,24 @@ class PathSidebar extends React.Component {
 
   handleClick() {
     this.props.onPathAddModeToggle();
-    if(!this.props.isPathSidebarOpen) {
-      this.props.onPathSidebarToggle();
-    }
+    console.log("click");
   }
 
 	render() {
-	  const styles = {
-		  bmCrossButton: {
- 	 			height: '24px',
-    		width: '24px'
-  		},
-  		bmCross: {
-   			background: '#bdc3c7'
-  		}
-		};
 		return (
-
-      <div>
+      <div className="textAlign: center">
         <Menu right noOverlay 
           customBurgerIcon={false}
                     isOpen={this.props.isPathSidebarOpen}
-                 className={styles.menu}
                     styles={styles}>
           {this.props.pathData.map((path, i) => {
             return (
-              <div className="textAlign: center">
-                <PathItem idx={i} key={i} path={path}/>
-              </div>
+              <PathItem idx={i} key={i} path={path}/>
             );
           })}
+          <Button isPressed={this.props.isPathAddMode}
+                    onClick={this.handleClick.bind(this)}
+                  className={styles.path-add-button}>경로 추가</Button>
         </Menu>
       </div>
     );
