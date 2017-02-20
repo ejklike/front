@@ -9,9 +9,9 @@ class Container extends React.Component {
     return (
       <div className={styles.container}>
         <CategoryFilters/>
-        <BlogSidebar/>
         <PathSidebar/>
         <Map google={window.google}>
+          <BlogSidebar/>
           {this.props.categoryData.map((category, i) => {
             return (
               <Markers category={category.categoryName}
