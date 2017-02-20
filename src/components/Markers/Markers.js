@@ -16,12 +16,9 @@ class Markers extends React.Component {
 
   componentDidMount() {
     this.setMarkers();
-    console.log('markers : ',this.state.markers);
   }
 
   componentDidUpdate(prevProps) {
-    console.log('Component Did Update : ',this.state.markers);
-    console.log('Props : ',this.props,prevProps);
     if(this.props.isPressed !== prevProps.isPressed || this.props === prevProps) {
       if(this.props.isPressed) {
         this.showMarkers();
@@ -47,7 +44,6 @@ class Markers extends React.Component {
     };
 
     directionsService.route(request, function(response, status) {
-      console.log("response", response);
       if (status === window.google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
       } else {
@@ -57,19 +53,7 @@ class Markers extends React.Component {
   }
 
   handlePathAdd(marker) {
-    if(this.props.pathData.length > 0) {
-      this.calculateTransit(this.props.pathData[this.props.pathData.length-1].placeID, marker.placeID);
-      this.props.onPathAdd({
-        car: 0,
-        walk: 0,
-        subway: 0,
-        bus: 0
-      });
-    }
-    this.props.onPathAdd({
-      placeName: marker.placeName,
-      placeID: marker.placeID
-    });
+
   }
 
   setMarkers() {
@@ -79,7 +63,9 @@ class Markers extends React.Component {
     var request = new XMLHttpRequest();
     var obj = this;
     var maps = this.props.map;
+    
     console.log(this.props.category);
+    
     if(this.props.category === "식사") {
       request.open('GET', 'http://api.norang.io/tokyo/place/list/eat', true);
       imgUrl = './assets/img/icons/restaurant.png';
@@ -97,7 +83,6 @@ class Markers extends React.Component {
     request.onload = () => {
       if(request.status === 200){
         placeList = JSON.parse(request.responseText);
-        console.log(this.state);
 
         for(var i=0; i<placeList.length; i++) {
           let pref = {
@@ -115,8 +100,7 @@ class Markers extends React.Component {
           let request = {
             placeId: placeList[i].place_id
           };
-          let service = new window.google.maps.places.PlacesService(this.props.map); 
-
+          let service = new window.google.maps.places.PlacesService(this.props.map);
           service.getDetails(request, function(place, status) {
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
               marker.placeName = place.name;
@@ -138,7 +122,6 @@ class Markers extends React.Component {
                 this.props.onSelectedMarkerChange(marker.placeID);
               } else {
                 if(this.props.selectedMarker === marker.placeID) {
-                  console.log(this.props.selectedMarker, marker.placeID);
                   this.props.onBlogSidebarToggle();
                 } 
               }
@@ -161,7 +144,6 @@ class Markers extends React.Component {
             markers: update(
               this.state.markers, { $push: [marker] })
           });
-        console.log(this.state);
         }
       } else {
         // We reached our target server, but it returned an error
@@ -172,7 +154,6 @@ class Markers extends React.Component {
   }
 
   showMarkers() {
-    console.log(this.state.markers);
     for(var i=0; i<this.state.markers.length; i++) {
       this.state.markers[i].setMap(this.props.map);
     }
