@@ -4,18 +4,28 @@ import { connect } from 'react-redux';
 import { pathToggle, blogToggle, pathAdd } from '../../actions';
 
 class PlaceInfo extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+  constructor(props) {
+    super(props);
+  }
 
-	render() {
-		return (
-			<div>
-				{this.props.name}
-				{this.props.rating}
-			</div>
-		);
-	}
+  render() {
+    if (this.props.price_level === null) {
+      return (
+        <div>
+          <strong>{this.props.name}</strong><br />
+          rating: {this.props.rating}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <strong>{this.props.name}</strong><br />
+          rating: {this.props.rating}<br />
+          price level: {this.props.price_level}
+        </div>
+      );
+    }
+  }
 }
 
 export default PlaceInfo;

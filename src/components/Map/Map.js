@@ -37,6 +37,17 @@ class Map extends React.Component {
       this.map.mapTypes.set('map_style', styledMap);
       this.map.setMapTypeId('map_style');
 
+      this.map.addListener('center_changed', () => {
+        var center = this.map.getCenter();
+        var bound = this.map.getBounds();
+        //this.map.center = center;
+        //this.map.northEast = bound.getNorthEast();
+        //this.map.southWest = bound.getSouthWest();
+        //console.log("center: ", center.lat(), center.lng());
+        //console.log("NE: ", bound.getNorthEast().lat(), bound.getNorthEast().lng());
+        //console.log("SW: ", bound.getSouthWest().lat(), bound.getSouthWest().lng());
+     });
+
       window.infoWindow = new window.google.maps.InfoWindow({
         content: ''
       });
