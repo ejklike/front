@@ -132,7 +132,6 @@ class Markers extends React.Component {
     let placeList = [];
     let imgUrl = [];
     var request = new XMLHttpRequest();
-    var obj = this;
     var maps = this.props.map;
 
     if(this.props.category === "식사") {
@@ -165,30 +164,17 @@ class Markers extends React.Component {
 
           let marker = new window.google.maps.Marker(pref);
           marker.setOpacity(0.8);
-
-          let request = {
-            placeId: placeList[i].place_id
-          };
-          let service = new window.google.maps.places.PlacesService(this.props.map); 
-
-          service.getDetails(request, function(place, status) {
-            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-              marker.placeName = place.name;
-              marker.rating = place.rating;
-              marker.placeID = place.place_id;
-            }
-          });
+          marker.placeID = placeList[i].place_id;
+          marker.name = placeList[i].name;
+          marker.rating = placeList[i].rating;
+          marker.price_level = placeList[i].price_level;
           
           if(marker.placeName === undefined) {
             marker.placeName = 'undefined';
           }
 
           marker.addListener('click', () => {
-            const content = ReactDOMServer.renderToString(
-              <PlaceInfo name={marker.placeName} rating={marker.rating}/>)
 
-            window.infoWindow.setContent(content);
-            window.infoWindow.open(this.props.map, marker);
 
             if(!this.props.isPathAddMode) {
               if(!this.props.isBlogSidebarOpen) {
@@ -215,10 +201,16 @@ class Markers extends React.Component {
           })
 
           marker.addListener('mouseover', () => {
+
+            const content = ReactDOMServer.renderToString(
+              <PlaceInfo name={marker.name} rating={marker.rating} price_level={marker.price_level}/>)
+            window.infoWindow.setContent(content);
+            window.infoWindow.open(this.props.map, marker);
             marker.setOpacity(1.0);        
           })
           
           marker.addListener('mouseout', () => {
+            window.infoWindow.close(this.props.map, marker);
             marker.setOpacity(0.8);
           })
 
