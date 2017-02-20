@@ -1,6 +1,7 @@
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import styles from './BlogSidebar.css';
-import DetailInfo from '../DetailInfo/DetailInfo.js'
+import detailStyles from './Detail.css';
 import { connect } from 'react-redux';
 
 var Menu = require('react-burger-menu').slide;
@@ -31,6 +32,7 @@ class BlogSidebar extends React.Component {
 	}
 
   getDetail(place){
+    var result = {};
     this.setState({
       detail: place
     });
@@ -50,20 +52,25 @@ class BlogSidebar extends React.Component {
       }
     });
  	 }
-  } 
+  }
 
 	render() {
 		return (
-      <div>
+      <div className={styles.blogSidebar}>
 				<Menu noOverlay 
               customBurgerIcon={false}
-              isOpen={this.props.isBlogSidebarOpen}
-              styles={styles}>
-              {this.state.detail ? (
-                <DetailInfo detail={this.state.detail} />
-              ) : (
-                <p>Nothing yet </p>
-              )}
+                        isOpen={this.props.isBlogSidebarOpen}
+                        styles={styles}>
+              <div className={detailStyles}>
+                <h5>{this.state.detail.name}</h5>
+                <div id="storeInfo">
+                  <p> Address : {this.state.detail.formatted_address}</p>
+                  <p> Phone : {this.state.detail.international_phone_number}</p>
+                  <p> Opening Hours : {this.state.detail.opening_hours ? this.state.detail.opening_hours : 'None'}</p>
+                  <p> website : {this.state.detail.website ? this.state.detail.website : 'None'} </p>       
+                  <img src={this.state.detail} />
+                </div>
+              </div>
 				</Menu>
       </div>
 		);
