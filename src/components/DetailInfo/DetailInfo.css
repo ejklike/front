@@ -1,9 +1,22 @@
-h5 {
+.placeName {
+	background: #a05591;
+	font-size: 20px;
+	text-decoration: underline;
 	text-align: center;
-	margin: 30px;
-	padding: 16px;
 }
 
-p {
+.placeImg {
+	width: 300px;
+	height: 200px;
+}
 
+.sectionName {
+	padding-left: 10px;
+	height: 20px;
+	font-size: 10px;
+	word-break: break-all
+}
+
+.sectionContent {
+	padding-left: 20px;
 }

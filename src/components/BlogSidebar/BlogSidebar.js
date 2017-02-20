@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import styles from './BlogSidebar.css';
-import detailStyles from './Detail.css';
+import { DetailInfo } from '../';
 import { connect } from 'react-redux';
 
 var Menu = require('react-burger-menu').slide;
@@ -15,7 +15,6 @@ class BlogSidebar extends React.Component {
     };
 
     this.getDetailOfMarker = this.getDetailOfMarker.bind(this);
-    this.getDetail = this.getDetail.bind(this);
 	}
 
   componentDidUpdate(prevProps,prevState){
@@ -31,13 +30,6 @@ class BlogSidebar extends React.Component {
 		return false;
 	}
 
-  getDetail(place){
-    var result = {};
-    this.setState({
-      detail: place
-    });
-  }
-
   getDetailOfMarker(place_id) {
   	if(this.props.map) {
     	let service = new window.google.maps.places.PlacesService(this.props.map); 
@@ -46,31 +38,23 @@ class BlogSidebar extends React.Component {
       	placeId: place_id
     	};
 
- 	   service.getDetails(request, (place, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        this.getDetail(place);
-      }
-    });
- 	 }
+ 	   	service.getDetails(request, (place, status) => {
+      	if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+       		this.setState({
+        		detail: place
+        	});
+     		}
+    	});
+ 	 	}
   }
 
 	render() {
 		return (
       <div className={styles.blogSidebar}>
-				<Menu noOverlay 
-              customBurgerIcon={false}
-                        isOpen={this.props.isBlogSidebarOpen}
-                        styles={styles}>
-              <div className={detailStyles}>
-                <h5>{this.state.detail.name}</h5>
-                <div id="storeInfo">
-                  <p> Address : {this.state.detail.formatted_address}</p>
-                  <p> Phone : {this.state.detail.international_phone_number}</p>
-                  <p> Opening Hours : {this.state.detail.opening_hours ? this.state.detail.opening_hours : 'None'}</p>
-                  <p> website : {this.state.detail.website ? this.state.detail.website : 'None'} </p>       
-                  <img src={this.state.detail} />
-                </div>
-              </div>
+				<Menu noOverlay customBurgerIcon={false}
+                       				 	  isOpen={this.props.isBlogSidebarOpen}
+                       					  styles={styles}>
+          <DetailInfo detail={this.state.detail}/>
 				</Menu>
       </div>
 		);
