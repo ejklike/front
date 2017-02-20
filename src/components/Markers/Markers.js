@@ -126,11 +126,7 @@ class Markers extends React.Component {
           });
           
           marker.addListener('click', () => {
-            const content = ReactDOMServer.renderToString(
-              <PlaceInfo name={marker.placeName} rating={marker.rating}/>)
 
-            window.infoWindow.setContent(content);
-            window.infoWindow.open(this.props.map, marker);
 
             if(!this.props.isPathAddMode) {
               if(!this.props.isBlogSidebarOpen) {
@@ -150,10 +146,15 @@ class Markers extends React.Component {
           })
 
           marker.addListener('mouseover', () => {
+            const content = ReactDOMServer.renderToString(
+              <PlaceInfo name={"dummy data"} rating={marker.rating}/>)
+            window.infoWindow.setContent(content);
+            window.infoWindow.open(this.props.map, marker);
             marker.setOpacity(1.0);        
           })
           
           marker.addListener('mouseout', () => {
+            window.infoWindow.close(this.props.map, marker);
             marker.setOpacity(0.8);
           })
 
