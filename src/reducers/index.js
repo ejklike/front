@@ -7,7 +7,8 @@ const categoryInitialState = {
     { categoryName: "식사", isPressed: false },
     { categoryName: "쇼핑", isPressed: false },
     { categoryName: "유흥", isPressed: false },
-    { categoryName: "유적", isPressed: false }
+    { categoryName: "유적", isPressed: false },
+    { categoryName: "핫플", isPressed: false }
   ]
 };
 
