@@ -29,6 +29,9 @@ class Markers extends React.Component {
   }
 
   calculateTransit(src, dest) {
+    console.log("src", src, "dest", dest);
+    let ret = {}, request = {};
+
     let directionsService = new window.google.maps.DirectionsService;
     let directionsDisplay = new window.google.maps.DirectionsRenderer;
     directionsDisplay.setMap(this.props.map);
@@ -37,7 +40,8 @@ class Markers extends React.Component {
       preserveViewport: true
     });
 
-    let request = {
+    //차
+    request = {
       origin: {placeId: src},
       destination: {placeId: dest},
       travelMode: window.google.maps.TravelMode.DRIVING
@@ -46,30 +50,85 @@ class Markers extends React.Component {
     directionsService.route(request, function(response, status) {
       if (status === window.google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
+        ret.car = {};
+        ret.car.text = response.routes[0].legs[0].duration.text;
+        ret.car.value = response.routes[0].legs[0].duration.value;
       } else {
       window.alert('Directions request failed due to ' + status);
       }
     });
+
+    //도보
+    request = {
+      origin: {placeId: src},
+      destination: {placeId: dest},
+      travelMode: window.google.maps.TravelMode.WALKING
+    };
+
+    directionsService.route(request, function(response, status) {
+      if (status === window.google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+        ret.walk = {};
+        ret.walk.text = response.routes[0].legs[0].duration.text;
+        ret.walk.value = response.routes[0].legs[0].duration.value;
+        
+      } else {
+      window.alert('Directions request failed due to ' + status);
+      }
+    });
+
+    //지하철
+    request = {
+      origin: {placeId: src},
+      destination: {placeId: dest},
+      travelMode: window.google.maps.TravelMode.TRANSIT,
+      transitOptions: {
+        modes: [window.google.maps.TransitMode.SUBWAY]
+      }
+    };
+
+    directionsService.route(request, function(response, status) {
+      if (status === window.google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+        ret.subway = {};
+        ret.subway.text = response.routes[0].legs[0].duration.text;
+        ret.subway.value = response.routes[0].legs[0].duration.value;
+        
+      } else {
+      window.alert('Directions request failed due to ' + status);
+      }
+
+    });
+
+    //버스
+    request = {
+      origin: {placeId: src},
+      destination: {placeId: dest},
+      travelMode: window.google.maps.TravelMode.TRANSIT,
+      transitOptions: {
+        modes: [window.google.maps.TransitMode.BUS]
+      }
+    };
+
+    directionsService.route(request, function(response, status) {
+      if (status === window.google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+        ret.bus = {};
+        ret.bus.text = response.routes[0].legs[0].duration.text;
+        ret.bus.value = response.routes[0].legs[0].duration.value;
+      } else {
+      window.alert('Directions request failed due to ' + status);
+      }
+    });
+
+    this.props.onPathAdd(ret);
   }
 
   handlePathAdd(marker) {
-    if(this.props.pathData.length > 0) {
-      this.calculateTransit(this.props.pathData[this.props.pathData.length-1].placeID, marker.placeID);
-      this.props.onPathAdd({
-        car: 0,
-        walk: 0,
-        subway: 0,
-        bus: 0
-      });
-    }
-    this.props.onPathAdd({
-      placeName: marker.placeName,
-      placeID: marker.placeID
-    });
+    
   }
 
   setMarkers() {
-
     let placeList = [];
     let imgUrl = [];
     var request = new XMLHttpRequest();
@@ -120,6 +179,10 @@ class Markers extends React.Component {
             }
           });
           
+          if(marker.placeName === undefined) {
+            marker.placeName = 'undefined';
+          }
+
           marker.addListener('click', () => {
             const content = ReactDOMServer.renderToString(
               <PlaceInfo name={marker.placeName} rating={marker.rating}/>)
@@ -137,9 +200,17 @@ class Markers extends React.Component {
                 } 
               }
             } else {
-              this.handlePathAdd(marker);
-            }
+              if(this.props.pathData.length > 0) {
+                console.log("src",this.props.pathData[this.props.pathData.length-1].placeID, "dest",marker.placeID);
+                this.calculateTransit(this.props.pathData[this.props.pathData.length-1].placeID, marker.placeID);
+              }
 
+              this.props.onPathAdd({
+                placeName: marker.placeName,
+                placeID: marker.placeID
+              });
+            }    
+            
             this.props.onSelectedMarkerChange(marker.placeID);
           })
 

@@ -13,7 +13,6 @@ class Map extends React.Component {
   loadMap() {
     if (this.props && this.props.google) {
       const google = this.props.google;
-      console.log("google", google);
       const styledMap = new google.maps.StyledMapType(mapStyles,
                           {name: "Styled Map"});
       const mapRef = this.refs.map;
@@ -41,8 +40,6 @@ class Map extends React.Component {
       window.infoWindow = new window.google.maps.InfoWindow({
         content: ''
       });
-
-      console.log("load map");
     }
 	}
 

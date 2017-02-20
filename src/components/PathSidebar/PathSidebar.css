@@ -21,5 +21,9 @@
 	text-align: center;
 }
 
-.path-add-button {
+.pathAddButton {
+  width: 260px;
+  height: 40px;
+  color: white;
+  background: #4db6ac;
 }

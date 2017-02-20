@@ -1,31 +1,46 @@
 import React from 'react';
-import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import { pathToggle, pathAddModeToggle } from '../../actions';
 import { PathItem } from '../';
 import styles from './PathSidebar.css';
 
 var Menu = require('react-burger-menu').slide;
+var Button = require('react-button');
+
+var themes = Button.themes;
+themes.default.style = {
+  width: '260px',
+  height: '30px'
+}
+themes.default.overStyle = {
+  background: '#4db6ac'
+}
+themes.default.pressedStyle = {
+  background: '#4db6ac'
+}
+themes.default.overPressedStyle = {
+  background: '#55c6bc'
+}
+themes.default.activeStyle = {
+  background: '#4db6ac'
+}
+themes.default.activePressedStyle = {
+  background: '#4db6ac'
+}
 
 class PathSidebar extends React.Component {
   constructor(props) {
 	  super(props);
 	}
 
-	 shouldComponentUpdate(prevProps) {
-		if((this.props.isPathSidebarOpen !== prevProps.isPathSidebarOpen) 
-      || (this.props.pathData.length !== prevProps.pathData.length)) {
-			return true;
-		}
-		return false;
-	}
-
-  handleClick() {
-    this.props.onPathAddModeToggle();
-    console.log("click");
+  shouldComponentUpdate(nextProps) {
+    if(this.props.pathData.length !== nextProps.pathData.length
+      || this.props.isPathSidebarOpen !== nextProps.isPathSidebarOpen
+      || this.props.isPathAddMode !== nextProps.isPathAddMode) return true;
+    return false;
   }
 
-	render() {
+  render() {
 		return (
       <div className="textAlign: center">
         <Menu right noOverlay 
@@ -37,9 +52,8 @@ class PathSidebar extends React.Component {
               <PathItem idx={i} key={i} path={path}/>
             );
           })}
-          <Button isPressed={this.props.isPathAddMode}
-                    onClick={this.handleClick.bind(this)}
-                  className={styles.path-add-button}>경로 추가</Button>
+          <Button onClick={this.props.onPathAddModeToggle}
+                  pressed={this.props.isPathAddMode}>경로 추가</Button>
         </Menu>
       </div>
     );
@@ -60,7 +74,6 @@ let mapDispatchToProps = (dispatch) => {
     onPathAddModeToggle: () => dispatch(pathAddModeToggle())
   };
 }
-
 
 PathSidebar = connect(mapStateToProps, mapDispatchToProps)(PathSidebar);
 
