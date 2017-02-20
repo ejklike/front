@@ -170,11 +170,7 @@ class Markers extends React.Component {
           marker.name = placeList[i].name;
           marker.rating = placeList[i].rating;
           marker.price_level = placeList[i].price_level;
-         
-          if(marker.placeName === undefined) {
-            marker.placeName = 'undefined';
-          }
-
+        
           marker.addListener('click', () => {
 
             if(!this.props.isPathAddMode) {
@@ -193,7 +189,7 @@ class Markers extends React.Component {
               }
 
               this.props.onPathAdd({
-                placeName: marker.placeName,
+                placeName: marker.name,
                 placeID: marker.placeID
               });
             }    
