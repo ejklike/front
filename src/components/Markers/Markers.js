@@ -212,6 +212,7 @@ class Markers extends React.Component {
           
           marker.addListener('mouseout', () => {
             marker.setOpacity(0.8);
+            window.infoWindow.close(this.props.map, marker);
           })
 
           this.setState({
