@@ -1,6 +1,7 @@
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import styles from './BlogSidebar.css';
-import DetailInfo from '../DetailInfo/DetailInfo.js'
+import detailStyles from './Detail.css';
 import { connect } from 'react-redux';
 
 var Menu = require('react-burger-menu').slide;
@@ -31,6 +32,7 @@ class BlogSidebar extends React.Component {
 	}
 
   getDetail(place){
+    var result = {};
     this.setState({
       detail: place
     });
@@ -51,11 +53,11 @@ class BlogSidebar extends React.Component {
       }
     });
  	 }
-  } 
+  }
 
 	render() {
 		return (
-      <div>
+      <div className={styles.blogSidebar}>
 				<Menu noOverlay 
               customBurgerIcon={false}
               isOpen={this.props.isBlogSidebarOpen}

@@ -30,7 +30,6 @@ class Markers extends React.Component {
 
 
   calculateTransit(src, dest) {
-    console.log("src", src, "dest", dest);
     let ret = {}, request = {};
 
     let directionsService = new window.google.maps.DirectionsService;
@@ -126,7 +125,7 @@ class Markers extends React.Component {
   }
 
   handlePathAdd(marker) {
-
+    
   }
 
   setMarkers() {
@@ -170,11 +169,7 @@ class Markers extends React.Component {
           marker.name = placeList[i].name;
           marker.rating = placeList[i].rating;
           marker.price_level = placeList[i].price_level;
-         
-          if(marker.placeName === undefined) {
-            marker.placeName = 'undefined';
-          }
-          
+        
           marker.addListener('click', () => {
 
             if(!this.props.isPathAddMode) {
@@ -188,12 +183,11 @@ class Markers extends React.Component {
               }
             } else {
               if(this.props.pathData.length > 0) {
-                console.log("src",this.props.pathData[this.props.pathData.length-1].placeID, "dest",marker.placeID);
                 this.calculateTransit(this.props.pathData[this.props.pathData.length-1].placeID, marker.placeID);
               }
 
               this.props.onPathAdd({
-                placeName: marker.placeName,
+                placeName: marker.name,
                 placeID: marker.placeID
               });
             }    
