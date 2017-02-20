@@ -14,13 +14,11 @@ class BlogSidebar extends React.Component {
       detail: {}
     };
 
-    this.handleOpen = this.handleOpen.bind(this);
     this.getDetailOfMarker = this.getDetailOfMarker.bind(this);
     this.getDetail = this.getDetail.bind(this);
 	}
 
   componentDidUpdate(prevProps,prevState){
-    console.log(this.state.detail);
     if(prevProps.selectedMarker !== this.props.selectedMarker){
       this.getDetailOfMarker(this.props.selectedMarker);
     } 
@@ -33,12 +31,6 @@ class BlogSidebar extends React.Component {
 		return false;
 	}
 
-  handleOpen() {
-    if(this.props.isPathAddMode && this.props.isBlogSidebarOpen) {
-      this.props.isBlogSidebarOpen = false;
-    }
-  }
-
   getDetail(place){
     var result = {};
     this.setState({
@@ -47,20 +39,19 @@ class BlogSidebar extends React.Component {
   }
 
   getDetailOfMarker(place_id) {
+  	if(this.props.map) {
+    	let service = new window.google.maps.places.PlacesService(this.props.map); 
 
-    let service = new window.google.maps.places.PlacesService(this.props.map); 
+   		let request = {
+      	placeId: place_id
+    	};
 
-    let request = {
-      placeId: place_id
-    };
-
-    var result = {};
-
-    service.getDetails(request, (place, status) => {
+ 	   service.getDetails(request, (place, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         this.getDetail(place);
       }
-    })
+    });
+ 	 }
   }
 
 	render() {
