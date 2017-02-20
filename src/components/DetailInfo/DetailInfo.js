@@ -43,7 +43,7 @@ class DetailInfo extends React.Component {
             <a target="_blank" href={this.props.detail.website ? this.props.detail.website : '/'}>{this.props.detail.name}</a>
             <div id="storeInfo">
               <img src={this.props.detail.photos ? this.props.detail.photos[0].getUrl({'maxWidth':200,'maxHeight':400}) : img} />
-              <p className="menu-item"> Phone : {this.props.detail.international_phone_number}</p>
+              <p className="menu-item"> Phone : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</p>
               <div id="opening_hours">
                 Open : {this.props.detail.opening_hours ? (
                   this.props.detail.opening_hours.open_now ? 
