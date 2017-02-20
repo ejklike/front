@@ -12,7 +12,7 @@ class OpeningHours extends React.Component {
       <div>
         {this.props.weekday_text.map((day,i) => {
           return(
-                <div key={i}>{day}</div>
+            <div key={i}>{day}</div>
           );
         })}
       </div>

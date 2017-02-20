@@ -4,10 +4,13 @@ import { Input } from 'react-materialize';
 class PathItem extends React.Component {
 	constructor(props) {
 		super(props);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
+	handleChange() {
+		console.log("change");
+	}
 	renderPathItem() {
-		console.log("상민",Object.assign({}, this.props));
 		if(this.props.idx%2 === 0) {
 			if(this.props.path.placeName) {
 				return (
@@ -20,8 +23,9 @@ class PathItem extends React.Component {
 			if(this.props.path.bus && this.props.path.car && this.props.path.subway && this.props.path.walk) {
 				return (
 					<a id="spot" className="menu-item" href="/">
-						<Input name={this.props.idx} type='radio' value='bus' label={this.props.path.bus.text}/>
-						<Input name={this.props.idx} type='radio' value='car' label={this.props.path.car.text}/>
+						<Input name={this.props.idx} 
+									 type='radio' value='bus' label={this.props.path.bus.text} onChange={this.handleChange}/>
+						<Input name={this.props.idx} type='radio' value='car' label={this.props.path.car.text} onChange={this.handleChange}/>
 						<Input name={this.props.idx} type='radio' value='subway' label={this.props.path.subway.text}/>
 						<Input name={this.props.idx} type='radio' value='walk' label={this.props.path.walk.text}/>
 					</a>

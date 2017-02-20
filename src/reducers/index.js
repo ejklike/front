@@ -73,6 +73,7 @@ const pathSidebar = (state = pathSidebarInitialState, action) => {
       })
     case PATH_ADD_MODE_TOGGLE:
       isPathAddMode = state.isPathAddMode;
+      console.log(isPathAddMode, "toggle");
       return Object.assign({}, state, {
         isPathAddMode: !isPathAddMode
       })

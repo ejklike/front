@@ -29,7 +29,7 @@ class Markers extends React.Component {
   }
 
 
-  calculateTransit(src, dest) {
+  calculateTransit(src, dest, marker) {
     let ret = {}, request = {};
 
     let directionsService = new window.google.maps.DirectionsService;
@@ -40,6 +40,7 @@ class Markers extends React.Component {
       preserveViewport: true
     });
 
+    let carPromise = new Promise(function(resolve, reject) {
     //차
     request = {
       origin: {placeId: src},
@@ -50,13 +51,13 @@ class Markers extends React.Component {
     directionsService.route(request, function(response, status) {
       if (status === window.google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
-        ret.car = {};
-        ret.car.text = response.routes[0].legs[0].duration.text;
-        ret.car.value = response.routes[0].legs[0].duration.value;
+        setTimeout(resolve, 0, response);
       } else {
-      window.alert('Directions request failed due to ' + status);
-      }
+        setTimeout(reject, 0, status);
+      }});
     });
+
+    let walkPromise = new Promise(function(resolve, reject) {
 
     //도보
     request = {
@@ -67,16 +68,14 @@ class Markers extends React.Component {
 
     directionsService.route(request, function(response, status) {
       if (status === window.google.maps.DirectionsStatus.OK) {
-        directionsDisplay.setDirections(response);
-        ret.walk = {};
-        ret.walk.text = response.routes[0].legs[0].duration.text;
-        ret.walk.value = response.routes[0].legs[0].duration.value;
-        
+         directionsDisplay.setDirections(response);
+         setTimeout(resolve, 0, response);
       } else {
-      window.alert('Directions request failed due to ' + status);
-      }
+        setTimeout(reject, 0, status);
+      }});
     });
 
+    let subwayPromise = new Promise(function(resolve, reject) {
     //지하철
     request = {
       origin: {placeId: src},
@@ -89,43 +88,69 @@ class Markers extends React.Component {
 
     directionsService.route(request, function(response, status) {
       if (status === window.google.maps.DirectionsStatus.OK) {
-        directionsDisplay.setDirections(response);
-        ret.subway = {};
-        ret.subway.text = response.routes[0].legs[0].duration.text;
-        ret.subway.value = response.routes[0].legs[0].duration.value;
-        
+         directionsDisplay.setDirections(response);
+         setTimeout(resolve, 0, response);
       } else {
-      window.alert('Directions request failed due to ' + status);
-      }
-
+        setTimeout(reject, 0, status);
+      }});
     });
 
-    //버스
-    request = {
-      origin: {placeId: src},
-      destination: {placeId: dest},
-      travelMode: window.google.maps.TravelMode.TRANSIT,
-      transitOptions: {
-        modes: [window.google.maps.TransitMode.BUS]
+
+    let busPromise = new Promise(function(resolve, reject) {
+      //버스
+      request = {
+        origin: {placeId: src},
+        destination: {placeId: dest},
+        travelMode: window.google.maps.TravelMode.TRANSIT,
+        transitOptions: {
+          modes: [window.google.maps.TransitMode.BUS]
+        }
+      };
+
+      directionsService.route(request, function(response, status) {
+      if (status === window.google.maps.DirectionsStatus.OK) {
+         directionsDisplay.setDirections(response);
+         setTimeout(resolve, 0, response);
+      } else {
+        setTimeout(reject, 0, status);
+      }});
+    });
+
+    let vm = this;
+
+    Promise.all([carPromise, walkPromise, subwayPromise, busPromise]).then(function(results) {
+      let carResult = results[0];
+      let walkResult = results[1];
+      let subwayResult = results[2];
+      let busResult = results[3];
+
+     let ret = {
+      car : {
+        text: carResult.routes[0].legs[0].duration.text,
+        value: carResult.routes[0].legs[0].duration.value
+      },
+      walk : {
+        text: walkResult.routes[0].legs[0].duration.text,
+        value: walkResult.routes[0].legs[0].duration.value
+      },
+      subway : {
+        text: subwayResult.routes[0].legs[0].duration.text,
+        value: subwayResult.routes[0].legs[0].duration.value
+      },
+      bus : {
+        text: busResult.routes[0].legs[0].duration.text,
+        value: busResult.routes[0].legs[0].duration.value
       }
     };
 
-    directionsService.route(request, function(response, status) {
-      if (status === window.google.maps.DirectionsStatus.OK) {
-        directionsDisplay.setDirections(response);
-        ret.bus = {};
-        ret.bus.text = response.routes[0].legs[0].duration.text;
-        ret.bus.value = response.routes[0].legs[0].duration.value;
-      } else {
-      window.alert('Directions request failed due to ' + status);
-      }
+    vm.props.onPathAdd(ret);
+    vm.props.onPathAdd({
+      placeName: marker.name, 
+      placeID: marker.placeID
     });
-
-    this.props.onPathAdd(ret);
-  }
-
-  handlePathAdd(marker) {
-    
+  }, function (reason) {
+      window.alert('Directions request failed due to ' + reason[0]);
+  });
   }
 
   setMarkers() {
@@ -183,13 +208,13 @@ class Markers extends React.Component {
               }
             } else {
               if(this.props.pathData.length > 0) {
-                this.calculateTransit(this.props.pathData[this.props.pathData.length-1].placeID, marker.placeID);
+                this.calculateTransit(this.props.pathData[this.props.pathData.length-1].placeID, marker.placeID, marker);
+              } else {
+                this.props.onPathAdd({
+                  placeName: marker.name,
+                  placeID: marker.placeID
+                });
               }
-
-              this.props.onPathAdd({
-                placeName: marker.name,
-                placeID: marker.placeID
-              });
             }    
             
             this.props.onSelectedMarkerChange(marker.placeID);

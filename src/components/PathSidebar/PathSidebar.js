@@ -30,8 +30,8 @@ themes.default.activePressedStyle = {
 
 class PathSidebar extends React.Component {
   constructor(props) {
-	  super(props);
-	}
+	 super(props);
+  }
 
   shouldComponentUpdate(nextProps) {
     if(this.props.pathData.length !== nextProps.pathData.length
