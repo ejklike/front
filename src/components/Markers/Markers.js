@@ -77,9 +77,7 @@ class Markers extends React.Component {
     let placeList = [];
     let imgUrl = [];
     var request = new XMLHttpRequest();
-    var obj = this;
     var maps = this.props.map;
-    console.log(this.props.category);
     if(this.props.category === "식사") {
       request.open('GET', 'http://api.norang.io/tokyo/place/list/eat', true);
       imgUrl = './assets/img/icons/restaurant.png';
@@ -111,19 +109,10 @@ class Markers extends React.Component {
 
           let marker = new window.google.maps.Marker(pref);
           marker.setOpacity(0.8);
-
-          let request = {
-            placeId: placeList[i].place_id
-          };
-          let service = new window.google.maps.places.PlacesService(this.props.map); 
-
-          service.getDetails(request, function(place, status) {
-            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-              marker.placeName = place.name;
-              marker.rating = place.rating;
-              marker.placeID = place.place_id;
-            }
-          });
+          marker.placeID = placeList[i].place_id;
+          marker.name = placeList[i].name;
+          marker.rating = placeList[i].rating;
+          marker.price_level = placeList[i].price_level;
           
           marker.addListener('click', () => {
 
@@ -146,8 +135,9 @@ class Markers extends React.Component {
           })
 
           marker.addListener('mouseover', () => {
+
             const content = ReactDOMServer.renderToString(
-              <PlaceInfo name={"dummy data"} rating={marker.rating}/>)
+              <PlaceInfo name={marker.name} rating={marker.rating} price_level={marker.price_level}/>)
             window.infoWindow.setContent(content);
             window.infoWindow.open(this.props.map, marker);
             marker.setOpacity(1.0);        
