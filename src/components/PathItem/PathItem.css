@@ -1,0 +1,9 @@
+.pathTableWrapper {
+	height: 100px;
+}
+
+.pathTable {
+	position: relative;
+	width: 80%;
+	height: 100%;
+}

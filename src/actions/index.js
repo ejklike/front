@@ -6,6 +6,7 @@ export const PATH_ADD_MODE_TOGGLE = 'PATH_ADD_MODE_TOGGLE';
 export const CONTENT_CHANGE = 'CONTENT_CHANGE';
 export const SELECTED_MARKER_CHANGE = 'SELECTED_MARKER_CHANGE';
 export const TRANSIT_ADD = 'TRANSIT_ADD';
+export const TRAVEL_TIME_CHANGE = 'TRAVEL_TIME_CHANGE';
 
 export function categoryToggle(key) {
   return {
@@ -43,5 +44,13 @@ export function selectedMarkerChange(selectedMarker) {
   return {
     type: SELECTED_MARKER_CHANGE,
     selectedMarker: selectedMarker
+  };
+}
+
+export function travelTimeChange(key, time) {
+  return {
+    type: TRAVEL_TIME_CHANGE,
+    key: key,
+    time: time
   };
 }

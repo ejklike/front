@@ -1,4 +1,5 @@
-import { CATEGORY_TOGGLE, PATH_TOGGLE, BLOG_TOGGLE, PATH_ADD, PATH_ADD_MODE_TOGGLE, SELECTED_MARKER_CHANGE, TRANSIT_ADD } from '../actions';
+import { CATEGORY_TOGGLE, PATH_TOGGLE, BLOG_TOGGLE, PATH_ADD, PATH_ADD_MODE_TOGGLE, SELECTED_MARKER_CHANGE, 
+  TRANSIT_ADD, TRAVEL_TIME_CHANGE, TRAVEL_TIME_SUM } from '../actions';
 import { combineReducers } from 'redux';
 import update from '../../node_modules/react-addons-update';
 
@@ -19,7 +20,8 @@ const blogSidebarInitialState = {
 const pathSidebarInitialState = {
   isPathSidebarOpen: false,
   isPathAddMode: false,
-  pathData: []
+  pathData: [],
+  travelTime: [0,0,0,0,0,0,0,0,0,0]
 }
 
 const markersInitialState = {
@@ -73,8 +75,17 @@ const pathSidebar = (state = pathSidebarInitialState, action) => {
       })
     case PATH_ADD_MODE_TOGGLE:
       isPathAddMode = state.isPathAddMode;
+      console.log(isPathAddMode, "toggle");
       return Object.assign({}, state, {
         isPathAddMode: !isPathAddMode
+      })
+    case TRAVEL_TIME_CHANGE:
+      return update(state, {
+        travelTime: {
+          [action.key]: {
+            $set: action.time
+          }
+        }
       })
     default:
       return state
@@ -99,4 +110,4 @@ const whereTodayApp = combineReducers({
   markers
 });
 
-export default whereTodayApp;
+export default whereTodayApp; 

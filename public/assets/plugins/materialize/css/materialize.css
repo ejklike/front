@@ -2960,13 +2960,14 @@ nav {
   line-height: 56px;
   opacity: 0.8; }
   nav.nav-extended {
-    height: auto; }
+    height: 100%; }
     nav.nav-extended .nav-wrapper {
       min-height: 56px;
-      height: auto; }
+      height: 100%; }
     nav.nav-extended .nav-content {
       position: relative;
-      line-height: normal; }
+      line-height: normal;
+      height: 100%; }
   nav a {
     color: #fff; }
   nav i,

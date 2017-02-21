@@ -7,5 +7,6 @@ import PathSidebar from './PathSidebar/PathSidebar';
 import BlogSidebar from './BlogSidebar/BlogSidebar';
 import PlaceInfo from './PlaceInfo/PlaceInfo';
 import PathItem from './PathItem/PathItem';
+import DetailInfo from './DetailInfo/DetailInfo';
 
-export { App, Container, CategoryFilters, Map, Markers, PathSidebar, BlogSidebar, PlaceInfo, PathItem };
+export { App, Container, CategoryFilters, Map, Markers, PathSidebar, BlogSidebar, PlaceInfo, PathItem, DetailInfo };
