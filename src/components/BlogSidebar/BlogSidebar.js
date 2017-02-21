@@ -28,7 +28,6 @@ class BlogSidebar extends React.Component {
 			return true;
 		}
 		return false;
-	}
 
   getDetailOfMarker(place_id) {
   	if(this.props.map) {
@@ -82,7 +81,6 @@ class BlogSidebar extends React.Component {
                        				 	  isOpen={this.props.isBlogSidebarOpen}
                        					  styles={styles}>
            <DetailInfo detail={this.state.detail}/>
-
 				</Menu>
       </div>
 		);

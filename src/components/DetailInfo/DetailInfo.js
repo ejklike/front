@@ -16,7 +16,24 @@ class OpeningHours extends React.Component {
           );
         })}
       </div>
-    )
+    );
+  }
+}
+
+class Review extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    return(
+      <div id="reviewInfo">
+        <h5>reviews</h5>
+        <div>
+
+        </div>
+      </div>
+    );
   }
 }
 
@@ -60,6 +77,7 @@ class DetailInfo extends React.Component {
               <OpeningHours 
                 weekday_text={this.props.detail.opening_hours.weekday_text} 
             />}
+
             </div>
          </div>
          <div>

@@ -24,3 +24,16 @@
 #storeInfo {
 	background: red;
 }
+
+.detail {
+	text-align: center;
+	padding: 15px;
+}
+
+#placeName {
+	font-weight: bold;
+}
+
+img {
+	opacity: 1.0;
+}
