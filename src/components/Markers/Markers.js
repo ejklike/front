@@ -196,7 +196,7 @@ class Markers extends React.Component {
           marker.price_level = placeList[i].price_level;
         
           marker.addListener('click', () => {
-
+            
             if(!this.props.isPathAddMode) {
               if(!this.props.isBlogSidebarOpen) {
                 this.props.onBlogSidebarToggle();

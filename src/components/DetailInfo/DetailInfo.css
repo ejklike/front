@@ -6,7 +6,7 @@
 }
 
 .placeImg {
-	width: 300px;
+	width: 280px;
 	height: 200px;
 }
 
@@ -19,4 +19,8 @@
 
 .sectionContent {
 	padding-left: 20px;
+}
+
+#storeInfo {
+	background: red;
 }

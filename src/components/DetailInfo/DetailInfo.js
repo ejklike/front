@@ -45,13 +45,12 @@ class DetailInfo extends React.Component {
             <b>{this.props.detail.name}</b>
           </a>
         </div>
-        <div id="storeInfo">
+        <div>
           <img className={styles.placeImg} 
-                     src={this.props.detail.photos? this.props.detail.photos[0].getUrl({'width':300,'maxHeight':200}) : img} />
-          <div className="menu-item">
-            <p className={styles.sectionName}>전화번호</p>
-            <p className={styles.sectionContent}>{this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</p>
-          </div>
+                     src={this.props.detail.photos? this.props.detail.photos[0].getUrl({'width':280,'maxHeight':200}) : img} />
+        </div>
+        <div id="storeInfo">
+            <div className="menu-item"> 전화번호 : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</div>
           <div id="opening_hours">
             {this.props.detail.opening_hours &&
               <a className="menu-item" onClick={this.onClick} href='#' >운영 시간 보기</a>}
@@ -62,6 +61,10 @@ class DetailInfo extends React.Component {
                 weekday_text={this.props.detail.opening_hours.weekday_text} 
             />}
             </div>
+         </div>
+         <div>
+            {this.props.detail.tabelog_rating} <br/>
+            {this.props.detail.tripadvisor_rating}
          </div>
       </div>
 		);

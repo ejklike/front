@@ -1,15 +1,16 @@
 nav {
   &.nav-extended {
-    height: auto;
+    height: 100%;
 
     .nav-wrapper {
       min-height: $navbar-height-mobile;
-      height: auto;
+      height: 100%;
     }
 
     .nav-content {
       position: relative;
       line-height: normal;
+      height: 100%;
     }
   }
 

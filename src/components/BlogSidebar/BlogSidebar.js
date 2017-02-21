@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import styles from './BlogSidebar.css';
 import { DetailInfo } from '../';
 import { connect } from 'react-redux';
+import dummy from './dummy.json';
 
 var Menu = require('react-burger-menu').slide;
 
@@ -40,21 +40,49 @@ class BlogSidebar extends React.Component {
 
  	   	service.getDetails(request, (place, status) => {
       	if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+          if(dummy[place_id]) {
+            place.tabelog_rating = dummy[place_id].tabelog_rating;
+            place.tripadvisor_rating = dummy[place_id].tripadvisor_rating;
+          } else {
+            place.tabelog_rating = -1;
+            place.tripadvisor_rating = -1;
+          }
+          
        		this.setState({
         		detail: place
         	});
-     		}
+     	 }
     	});
  	 	}
   }
 
 	render() {
+	  let styles = {
+		  bmMenu: {
+    	  background: '#373a47',
+    	  padding: '0px',
+ 	      fontSize: '1.15em',
+        opacity: 0.8
+      },
+      bmItemList: {
+      	overflow: 'auto',
+        padding: '10px'
+      },
+      bmMorphShape: {
+      	fill: '#373a47'
+      },
+      menuItem: {
+      	textAlign: 'center'
+      }
+    };
+
 		return (
       <div className={styles.blogSidebar}>
 				<Menu noOverlay customBurgerIcon={false}
                        				 	  isOpen={this.props.isBlogSidebarOpen}
                        					  styles={styles}>
-          <DetailInfo detail={this.state.detail}/>
+           <DetailInfo detail={this.state.detail}/>
+
 				</Menu>
       </div>
 		);
