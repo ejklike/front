@@ -1,5 +1,5 @@
 import React from 'react';
-import { CategoryFilters, Map, Markers, PathSidebar, BlogSidebar } from '../';
+import { CategoryFilters, Map, Markers, PathSidebar, BlogSidebar, Cluster } from '../';
 import GoogleApiComponent from '../GoogleApiModules/GoogleApiComponent';
 import styles from './Container.css';
 import { connect } from 'react-redux';
@@ -13,13 +13,20 @@ class Container extends React.Component {
         <Map google={window.google}>
           <BlogSidebar/>
           {this.props.categoryData.map((category, i) => {
+            if(i < 4) {
             return (
               <Markers category={category.categoryName}
                             key={i}
                             idx={i}
                       isPressed={category.isPressed}/>
-            );  
-          })}
+            );
+            } else  {
+              return(
+              <Cluster isPressed={category.isPressed}/>
+              );
+            }
+            }
+          )}
         </Map>
       </div>
     );
