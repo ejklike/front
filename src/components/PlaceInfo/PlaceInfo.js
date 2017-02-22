@@ -48,11 +48,10 @@ class PlaceInfo extends React.Component {
       );
     } else {
       return (
-        
         <div>
           <strong>{this.props.name}</strong><br />
-          rating: {this.state.star}<br />
-          price level: {this.state.money}
+          rating: {this.props.rating}<br />
+          price level: {this.props.price_level}
         </div>
       );
     }
