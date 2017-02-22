@@ -10,23 +10,23 @@ class Container extends React.Component {
       <div className={styles.container}>
         <CategoryFilters/>
         <PathSidebar/>
+        
         <Map google={window.google}>
           <BlogSidebar/>
           {this.props.categoryData.map((category, i) => {
-            if(i < 4) {
-            return (
-              <Markers category={category.categoryName}
-                            key={i}
-                            idx={i}
-                      isPressed={category.isPressed}/>
-            );
-            } else  {
-              return(
-              <Cluster isPressed={category.isPressed}/>
+            if(i < 5) {
+              return (
+                <Markers category={category.categoryName}
+                              key={i}
+                              idx={i}
+                        isPressed={category.isPressed}/>
+              );
+            } else {
+              return (
+                <Cluster isPressed={category.isPressed}/>
               );
             }
-            }
-          )}
+          })}
         </Map>
       </div>
     );
