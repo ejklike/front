@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './DetailInfo.css';
-import img from './no-image.png';
+import noImg from './no-image.png';
+import tabelogLogo from '../../../img/logos/tabelogLogo.png';
+import tripadvisorLogo from '../../../img/logos/tripadvisorLogo.png';
 
 class OpeningHours extends React.Component {
   constructor(props){
@@ -64,7 +66,7 @@ class DetailInfo extends React.Component {
         </div>
         <div>
           <img className={styles.placeImg} 
-                     src={this.props.detail.photos? this.props.detail.photos[0].getUrl({'width':280,'maxHeight':200}) : img} />
+                     src={this.props.detail.photos? this.props.detail.photos[0].getUrl({'width':280,'maxHeight':200}) : noImg} />
         </div>
         <div id="storeInfo">
             <div className="menu-item"> 전화번호 : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</div>
@@ -81,8 +83,8 @@ class DetailInfo extends React.Component {
             </div>
          </div>
          <div>
-            {this.props.detail.tabelog_rating} <br/>
-            {this.props.detail.tripadvisor_rating}
+            <img src={tabelogLogo}/> {this.props.detail.tabelog_rating} <br/>
+            <img src={tripadvisorLogo}/> {this.props.detail.tripadvisor_rating}
          </div>
       </div>
 		);

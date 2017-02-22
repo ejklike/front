@@ -26,10 +26,8 @@ class Cluster extends React.Component {
    }
 
    setClusters() {
-     console.log("length", dummy.length);
       for(let i=0; i<dummy.length; i++) {
-        let clusterPromise = new Promise(function(resolve, reject) {
-          let pref = {
+        let pref = {
           strokeColor: '#FF0000',
           strokeOpacity: 0.8,
           strokeWeight: 2,
@@ -41,24 +39,15 @@ class Cluster extends React.Component {
         };
 
         let cluster = new window.google.maps.Circle(pref);
-        });
-        
-        let vm = this;
-        Promise.all([clusterPromise]).then(function(results) {
-            vm.setState({
-          clusters: update(
-          vm.state.clusters, { $push: [vm.cluster] })
-        });
-        })
-
-         
       }
-
-      console.log("dho?KJl;kad", this.state.clusters.length);
-   }
+        
+      this.setState({
+        clusters: update(
+          this.state.clusters, { $push: [this.cluster] })
+      });
+    }
 
    showClusters() {
-     console.log("size", this.state.clusters.length);
      for(let i=0; i<this.state.clusters.length; i++) {
        this.state.clusters[i].setMap(this.props.map);
      }
