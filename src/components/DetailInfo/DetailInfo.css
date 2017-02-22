@@ -23,16 +23,17 @@
 }
 
 .detail {
-	text-align: center;
-	padding: 10px;
+  text-align: center;
+  padding: 10px;
 }
 
-img {
-	opacity: 1.0;
+.logoImg {
+  opacity: 1.0;
+  height: 10px;
 }
 
 .menuItem {
   margin: 0px;
   padding: 0px;
-  height: 35px;
+  height: 30px;
 }

@@ -105,16 +105,18 @@ class DetailInfo extends React.Component {
               />
             }
           </div>
-         </div>
-         <div>
-           {
-             this.props.detail.tabelog_rating != -1 &&
-              <div>
-                <img src={tabelogLogo}/> {this.props.detail.tabelog_rating}
-                <br/>
-              </div>
-           }
-            <img src={tripadvisorLogo}/> {this.props.detail.tripadvisor_rating}
+          </div>
+          <div>
+          {
+            this.props.detail.tabelog_rating != -1 &&
+            <div className={styles.menuItem}>
+              <img className={styles.logoImg} src='./assets/img/logos/tabelogLogo.png'/> {this.props.detail.tabelog_rating}
+              <br/>
+            </div>
+          }
+          <div className={styles.menuItem}>
+            <img className={styles.logoImg} src='./assets/img/logos/tripadvisorLogo.png'/> {this.props.detail.tripadvisor_rating}
+          </div>
          </div>
       </div>
     );
