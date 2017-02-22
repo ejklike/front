@@ -8,5 +8,6 @@ import BlogSidebar from './BlogSidebar/BlogSidebar';
 import PlaceInfo from './PlaceInfo/PlaceInfo';
 import PathItem from './PathItem/PathItem';
 import DetailInfo from './DetailInfo/DetailInfo';
+import Cluster from './Cluster/Cluster';
 
-export { App, Container, CategoryFilters, Map, Markers, PathSidebar, BlogSidebar, PlaceInfo, PathItem, DetailInfo };
+export { App, Container, CategoryFilters, Map, Markers, PathSidebar, BlogSidebar, PlaceInfo, PathItem, DetailInfo, Cluster };

@@ -28,6 +28,7 @@ class BlogSidebar extends React.Component {
 			return true;
 		}
 		return false;
+  }
 
   getDetailOfMarker(place_id) {
   	if(this.props.map) {
