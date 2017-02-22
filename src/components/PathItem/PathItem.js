@@ -29,13 +29,13 @@ class PathItem extends React.Component {
 			if(this.props.path.bus && this.props.path.car && this.props.path.subway && this.props.path.walk) {
 				return (
 					<div>
-				    <Input name={this.props.idx} type='radio' value='red' label={this.props.path.car.text} 
+				    <Input name={this.props.idx} type='radio' value='car' label={this.props.path.car.text} 
 				    		onClick={this.handleClick.bind(this,this.props.path.car.value)}/>
-    				<Input name={this.props.idx} type='radio' value='yellow' label={this.props.path.walk.text} 
+    				<Input name={this.props.idx} type='radio' value='walk' label={this.props.path.walk.text} 
     						onClick={this.handleClick.bind(this,this.props.path.walk.value)}/>
-  				  <Input name={this.props.idx} type='radio' value='green' label={this.props.path.subway.text} 
+  				  <Input name={this.props.idx} type='radio' value='subway' label={this.props.path.subway.text} 
   				  		onClick={this.handleClick.bind(this,this.props.path.subway.value)}/>
-   					<Input name={this.props.idx} type='radio' value='brown' label={this.props.path.bus.text} 
+   					<Input name={this.props.idx} type='radio' value='bus' label={this.props.path.bus.text} 
    							onClick={this.handleClick.bind(this,this.props.path.bus.value)} />
 					</div>
 				)

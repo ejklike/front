@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './DetailInfo.css';
-import noImg from './no-image.png';
+import noImg from '../../../img/no-image.jpg';
 import tabelogLogo from '../../../img/logos/tabelogLogo.png';
 import tripadvisorLogo from '../../../img/logos/tripadvisorLogo.png';
 
@@ -72,7 +72,8 @@ class DetailInfo extends React.Component {
             <div className="menu-item"> 전화번호 : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</div>
           <div id="opening_hours">
             {this.props.detail.opening_hours &&
-              <a className="menu-item" onClick={this.onClick} href='#' >운영 시간 보기</a>}
+              <a className="menu-item" onClick={this.onClick} href='#' >
+                운영 시간 보기</a>}
           <br />
             {this.state.showOpeningHours && 
               this.props.detail.opening_hours.weekday_text && 

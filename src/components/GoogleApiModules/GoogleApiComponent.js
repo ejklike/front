@@ -7,7 +7,7 @@ import GoogleApi from './GoogleApi'
 const defaultMapConfig = {}
 export const wrapper = (options) => (WrappedComponent) => {
   const apiKey = options.apiKey;
-  const libraries = options.libraries || ['places'];
+  const libraries = options.libraries || ['places', 'directions'];
 
   class Wrapper extends React.Component {
     constructor(props, context) {

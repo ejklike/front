@@ -28,7 +28,6 @@ class Markers extends React.Component {
     }
   }
 
-
   calculateTransit(src, dest, marker) {
     let ret = {}, request = {};
 
@@ -223,7 +222,7 @@ class Markers extends React.Component {
           marker.addListener('mouseover', () => {
             marker.setOpacity(1.0);        
             const content = ReactDOMServer.renderToString(
-              <PlaceInfo name={marker.name} rating={marker.rating} price_level={marker.price_level}/>)
+              <PlaceInfo name={marker.name} rating={marker.rating} price_level={marker.price_level}/>);
 
             window.infoWindow.setContent(content);
             window.infoWindow.open(this.props.map, marker);
