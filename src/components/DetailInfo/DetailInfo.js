@@ -98,15 +98,16 @@ class DetailInfo extends React.Component {
             <div className="menu-item"> 전화번호 : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</div>
           <div id="opening_hours">
             {this.props.detail.opening_hours &&
-              <a className="menu-item" onClick={this.onClick} href='#' >운영 시간 보기</a>}
-          <br />
-            {this.state.showOpeningHours && 
+              <a className="menu-item" onClick={this.onClick} href='#' >운영 시간 보기<br/></a>
+            }
+            {
+              this.state.showOpeningHours && 
               this.props.detail.opening_hours.weekday_text && 
               <OpeningHours 
                 weekday_text={this.props.detail.opening_hours.weekday_text} 
-            />}
-
-            </div>
+              />
+            }
+          </div>
          </div>
          <div>
            {
