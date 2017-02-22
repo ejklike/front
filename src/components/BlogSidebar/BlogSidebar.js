@@ -60,7 +60,6 @@ class BlogSidebar extends React.Component {
 
       Promise.all([placePromise]).then(function(results) {
         let placeResult = results[0];
-        console.log("placeResult", placeResult);
         vm.setState({
           detail: placeResult
         });
