@@ -72,7 +72,8 @@ class PathSidebar extends React.Component {
         opacity: 0.8
       },
       bmItemList: {
-        overflow: 'auto'
+        overflow: 'auto',
+        marginBottom: '100px'
       },
       bmMorphShape: {
         fill: '#373a47'
