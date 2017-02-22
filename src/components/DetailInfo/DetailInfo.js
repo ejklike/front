@@ -93,16 +93,17 @@ class DetailInfo extends React.Component {
         </div>
         <div>
           {
+            this.props.detail.international_phone_number&&
             <div className={styles.menuItem}>
               <div className={styles.sectionName}>전화번호</div>
               <div className={styles.sectionContent}>
-                {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}<br/>
+                {this.props.detail.international_phone_number}<br/>
               </div>
             </div>
           }
           <div>
             {this.props.detail.opening_hours &&
-              <a className={styles.sectionName} onClick={this.onClick} href='#' >운영 시간 보기<br/></a>
+                <a className={styles.sectionName} onClick={this.onClick} href='#' >운영 시간 보기 <img className={styles.logoImg} src='./assets/img/icons/arrow.png'/><br/></a>
             }
             {
               this.state.showOpeningHours && 
