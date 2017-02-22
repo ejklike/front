@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './DetailInfo.css';
 import noImg from '../../../img/no-image.jpg';
-import tabelogLogo from '../../../img/logos/tabelogLogo.png';
-import tripadvisorLogo from '../../../img/logos/tripadvisorLogo.png';
 import Review from '../Review/Review';
 
 class OpeningHours extends React.Component {
@@ -15,7 +13,7 @@ class OpeningHours extends React.Component {
       <div>
         {this.props.weekday_text.map((day,i) => {
           return(
-            <div key={i}>{day}</div>
+            <div className={styles.sectionContent} key={i}>{day}</div>
           );
         })}
       </div>
@@ -24,14 +22,14 @@ class OpeningHours extends React.Component {
 }
 
 class DetailInfo extends React.Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
     this.state = {
       showOpeningHours: false
     }
 
     this.onClick = this.onClick.bind(this);
-	}
+  }
 
   onClick(e){
     e.preventDefault();
@@ -69,16 +67,29 @@ class DetailInfo extends React.Component {
               }
             </div>
            </div>
-           <div>
-             {
-               detail.tabelog_rating != -1 &&
+             <div>
+                {
+                  this.props.detail.international_phone_number&&
+                  <div className={styles.menuItem}>
+                    <div className={styles.sectionName}>전화번호</div>
+                    <div className={styles.sectionContent}>
+                      {this.props.detail.international_phone_number}<br/>
+                    </div>
+                  </div>
+                }
                 <div>
-                  <img src={tabelogLogo}/> {detail.tabelog_rating}
-                  <br/>
+                  {this.props.detail.opening_hours &&
+                      <a className={styles.sectionName} onClick={this.onClick} href='#' >운영 시간 보기 <img className={styles.logoImg} src='./assets/img/icons/arrow.png'/><br/></a>
+                  }
+                  {
+                    this.state.showOpeningHours && 
+                    this.props.detail.opening_hours.weekday_text && 
+                    <OpeningHours className={styles.sectionContent}
+                      weekday_text={this.props.detail.opening_hours.weekday_text} 
+                    />
+                  }
                 </div>
-             }
-              <img src={tripadvisorLogo}/> {detail.tripadvisor_rating}
-           </div>
+             </div>
            <div id="Reviews">
               {detail.reviews &&
                 detail.reviews.map((review,i) => {

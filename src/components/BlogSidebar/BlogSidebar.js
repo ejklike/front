@@ -8,14 +8,14 @@ var Menu = require('react-burger-menu').slide;
 
 class BlogSidebar extends React.Component {
   constructor(props) {
-	  super(props);
+    super(props);
     
     this.state = {
       detail: {}
     };
 
     this.getDetailOfMarker = this.getDetailOfMarker.bind(this);
-	}
+  }
 
   componentDidUpdate(prevProps,prevState){
     if(prevProps.selectedMarker !== this.props.selectedMarker){
@@ -23,11 +23,11 @@ class BlogSidebar extends React.Component {
     } 
   }
 
-	shoulComponentUpdate(nextProps) {
-		if(this.props.isBlogSidebarOpen !== nextProps.isBlogSidebarOpen) {
-			return true;
-		}
-		return false;
+  shoulComponentUpdate(nextProps) {
+    if(this.props.isBlogSidebarOpen !== nextProps.isBlogSidebarOpen) {
+      return true;
+    }
+    return false;
   }
 
   getDetailOfMarker(place_id) {
@@ -35,12 +35,12 @@ class BlogSidebar extends React.Component {
      let placesService = new window.google.maps.places.PlacesService(this.props.map);
 
       let placePromise = new Promise(function(resolve, reject) {
-    		let request = {
-         	placeId: place_id
-      	};
+        let request = {
+          placeId: place_id
+        };
 
         placesService.getDetails(request, (response, status) => {
-        	if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+          if (status === window.google.maps.places.PlacesServiceStatus.OK) {
             if(dummy[place_id]) {
               response.tabelog_rating = dummy[place_id].tabelog_rating;
               response.tripadvisor_rating = dummy[place_id].tripadvisor_rating;
@@ -67,36 +67,36 @@ class BlogSidebar extends React.Component {
     }
   }
 
-	render() {
-	  let styles = {
-		  bmMenu: {
-    	  background: '#373a47',
-    	  padding: '0px',
- 	      fontSize: '1.15em',
+  render() {
+    let styles = {
+      bmMenu: {
+        background: '#373a47',
+        padding: '0px',
+         fontSize: '1.15em',
         opacity: 0.8
       },
       bmItemList: {
-      	overflow: 'auto',
+        overflow: 'auto',
         padding: '10px'
       },
       bmMorphShape: {
-      	fill: '#373a47'
+        fill: '#373a47'
       },
       menuItem: {
-      	textAlign: 'center'
+        textAlign: 'center'
       }
     };
 
-		return (
+    return (
       <div className={styles.blogSidebar}>
-				<Menu noOverlay customBurgerIcon={false}
-                       				 	  isOpen={this.props.isBlogSidebarOpen}
-                       					  styles={styles}>
+        <Menu noOverlay customBurgerIcon={false}
+                                    isOpen={this.props.isBlogSidebarOpen}
+                                   styles={styles}>
            <DetailInfo detail={this.state.detail}/>
-				</Menu>
+        </Menu>
       </div>
-		);
-	}
+    );
+  }
 }
 
 let mapStateToProps = (state) => {
