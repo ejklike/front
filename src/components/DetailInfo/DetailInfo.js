@@ -56,11 +56,7 @@ class DetailImg extends React.Component {
   }
 
   render(){
-    return(
-      <div>
-        img in here
-      </div>
-    );
+    return null;
   }
 }
 
