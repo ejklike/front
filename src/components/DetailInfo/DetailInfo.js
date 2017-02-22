@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './DetailInfo.css';
-import noImg from './no-image.png';
+import noImg from '../../../img/no-image.jpg';
 import tabelogLogo from '../../../img/logos/tabelogLogo.png';
 import tripadvisorLogo from '../../../img/logos/tripadvisorLogo.png';
 
@@ -22,18 +22,43 @@ class OpeningHours extends React.Component {
   }
 }
 
-class Review extends React.Component {
-  constructor(props){
+class DetailImg extends React.Component {
+  constructor(props) {
     super(props);
+    this.state = {
+      havePhoto: false,
+      imgSrc: ''
+    }
+
+    this.getImgSrc = this.getImgSrc.bind(this);
+    this.showImg = this.showImg.bind(this);
+  }
+
+  componentDidMount(){
+    this.getImgSrc(this.props.photos);
+  }
+
+  getImgSrc(photos){
+    console.log(photos);
+    if (typeof photos == 'undefined'){
+      console.log('undefined');
+    }
+    else {
+      this.setState({
+        imgSrc: this.props.photos[0].getUrl({'maxWidth': 280, 'maxHeight': 250})
+      });
+      console.log(this.state.imgSrc);
+    }
+  }
+
+  showImg(){
+    console.log('showimg : ', this.state.imgSrc);
   }
 
   render(){
     return(
-      <div id="reviewInfo">
-        <h5>reviews</h5>
-        <div>
-
-        </div>
+      <div>
+        img in here
       </div>
     );
   }
@@ -65,8 +90,9 @@ class DetailInfo extends React.Component {
           </a>
         </div>
         <div>
-          <img className={styles.placeImg} 
-                     src={this.props.detail.photos? this.props.detail.photos[0].getUrl({'width':280,'maxHeight':200}) : noImg} />
+          <DetailImg photos={this.props.detail.photos} />
+          <img width="270" height="200" className={styles.placeImg} 
+                     src={typeof this.props.detail.photos !== 'undefined'? this.props.detail.photos[0].getUrl({'maxWidth': 280, 'maxHeight': 200}) : noImg} />
         </div>
         <div id="storeInfo">
             <div className="menu-item"> 전화번호 : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</div>
