@@ -45,5 +45,5 @@ let mapStateToProps = (state) => {
 Container = connect(mapStateToProps)(Container);
 
 export default GoogleApiComponent({
-  apiKey: 'AIzaSyDTOr0hyONA5Xfcbh80TP_pyW4umpuRAas'
+  apiKey: 'AIzaSyCuH6PEez3iXZLpyKgffLQLDJ0IBd1Fn28'
 })(Container);

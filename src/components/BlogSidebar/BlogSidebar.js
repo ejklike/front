@@ -31,29 +31,41 @@ class BlogSidebar extends React.Component {
   }
 
   getDetailOfMarker(place_id) {
-  	if(this.props.map) {
-    	let service = new window.google.maps.places.PlacesService(this.props.map); 
+    if(this.props.map) {
+     let placesService = new window.google.maps.places.PlacesService(this.props.map);
 
-   		let request = {
-      	placeId: place_id
-    	};
+      let placePromise = new Promise(function(resolve, reject) {
+    		let request = {
+         	placeId: place_id
+      	};
 
- 	   	service.getDetails(request, (place, status) => {
-      	if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-          if(dummy[place_id]) {
-            place.tabelog_rating = dummy[place_id].tabelog_rating;
-            place.tripadvisor_rating = dummy[place_id].tripadvisor_rating;
+        placesService.getDetails(request, (response, status) => {
+        	if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+            if(dummy[place_id]) {
+              response.tabelog_rating = dummy[place_id].tabelog_rating;
+              response.tripadvisor_rating = dummy[place_id].tripadvisor_rating;
+              setTimeout(resolve, 0, response);
+            } else {
+              response.tabelog_rating = -1;
+              response.tripadvisor_rating = -1;
+              setTimeout(resolve, 0, response);
+            }
           } else {
-            place.tabelog_rating = -1;
-            place.tripadvisor_rating = -1;
+            setTimeout(reject, 0, status);
           }
-          
-       		this.setState({
-        		detail: place
-        	});
-     	 }
-    	});
- 	 	}
+        });
+      });
+
+      let vm = this;
+
+      Promise.all([placePromise]).then(function(results) {
+        let placeResult = results[0];
+        console.log("placeResult", placeResult);
+        vm.setState({
+          detail: placeResult
+        });
+      });
+    }
   }
 
 	render() {

@@ -1,13 +1,14 @@
 import React from 'react';
-import update from '../../../node_modules/react-addons-update';
+import ReactDOMServer from 'react-dom/server';
+import { ClusterInfo } from '../';
 import dummy from './dummy.json';
 
 class Cluster extends React.Component {
-   constructor(props) {
+   constructor(props) { 
       super(props);
 
       this.state = {
-         clusters: []
+        clusters: []
       };
    }
 
@@ -28,24 +29,44 @@ class Cluster extends React.Component {
    setClusters() {
       for(let i=0; i<dummy.length; i++) {
         let pref = {
-          strokeColor: '#FF0000',
+          strokeColor: 'orange',
           strokeOpacity: 0.8,
           strokeWeight: 2,
-          fillColor: '#FF0000',
+          fillColor: 'orange',
           fillOpacity: 0.35,
           center: {lat: dummy[i].lat, lng: dummy[i].lng},
+          position: {lat: dummy[i].lat, lng: dummy[i].lng},
           radius: dummy[i].radius,
+          name: dummy[i].name,
           description: dummy[i].description
         };
-
-        let cluster = new window.google.maps.Circle(pref);
-      }
         
-      this.setState({
-        clusters: update(
-          this.state.clusters, { $push: [this.cluster] })
-      });
-    }
+        let tourCluster = new window.google.maps.Circle(pref);
+        
+        new window.google.maps.event.addListener(tourCluster, 'mouseover', () => {
+          tourCluster.setOptions({
+            fillOpacity: 0.6
+          });
+          const content = ReactDOMServer.renderToString(
+              <ClusterInfo name={tourCluster.name} description={tourCluster.description}/>);
+
+          window.infoWindow2.setContent(content);
+          window.infoWindow2.open(this.map, tourCluster);
+        });
+        
+        new window.google.maps.event.addListener(tourCluster, 'mouseout', () =>{
+          tourCluster.setOptions({
+            fillOpacity: 0.35
+          });
+          window.infoWindow2.close(this.map, tourCluster);
+        });
+
+        let newClusters = this.state.clusters;
+        newClusters.push(tourCluster);
+
+        this.setState({clusters: newClusters});
+      }
+   }
 
    showClusters() {
      for(let i=0; i<this.state.clusters.length; i++) {

@@ -9,5 +9,6 @@ import PlaceInfo from './PlaceInfo/PlaceInfo';
 import PathItem from './PathItem/PathItem';
 import DetailInfo from './DetailInfo/DetailInfo';
 import Cluster from './Cluster/Cluster';
+import ClusterInfo from './ClusterInfo/ClusterInfo';
 
-export { App, Container, CategoryFilters, Map, Markers, PathSidebar, BlogSidebar, PlaceInfo, PathItem, DetailInfo, Cluster };
+export { App, Container, CategoryFilters, Map, Markers, PathSidebar, BlogSidebar, PlaceInfo, PathItem, DetailInfo, Cluster, ClusterInfo };

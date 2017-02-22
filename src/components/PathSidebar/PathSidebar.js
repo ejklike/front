@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { pathToggle, pathAddModeToggle, travelTimeSum } from '../../actions';
 import { PathItem } from '../';
+import styles from './PathSidebar.css';
 
 var Menu = require('react-burger-menu').slide;
 var Button = require('react-button');
@@ -10,7 +11,10 @@ var themes = Button.themes;
 
 themes.default.style = {
   width: '260px',
-  height: '30px'
+  height: '30px',
+  position: 'fixed',
+  right: '10px',
+  bottom: '10px'
 }
 themes.default.overStyle = {
   background: '#4db6ac'
@@ -50,7 +54,6 @@ class PathSidebar extends React.Component {
   updateTravelTimeSum() {
     let sum = 0;
 
-    console.log("travelTime", this.props.travelTime);
     for(let i=0; i<this.props.travelTime.length; i++) {
       sum += this.props.travelTime[i];
     }
@@ -58,8 +61,6 @@ class PathSidebar extends React.Component {
     this.setState({
       travelTimeSum: sum
     });
-
-    console.log("sum",this.state.travelTimeSum);
   }
 
   render() {
@@ -92,10 +93,10 @@ class PathSidebar extends React.Component {
               <PathItem idx={i} key={i} path={path} onUpdateTravelTimeSum={this.updateTravelTimeSum}/>
             );
           })}
-          <Button onClick={this.props.onPathAddModeToggle}
-                  pressed={this.props.isPathAddMode}>경로 추가</Button>
+           <Button onClick={this.props.onPathAddModeToggle}
+                  pressed={this.props.isPathAddMode}>
+                  경로 추가</Button>  
         </Menu>
-       
       </div>
     );
 	}
