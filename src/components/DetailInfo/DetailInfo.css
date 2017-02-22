@@ -1,30 +1,24 @@
 .placeName {
-	background: #a05591;
-	font-size: 20px;
-	text-decoration: underline;
-	text-align: center;
-	font-weight: bold;
+  background: #a05591;
+  font-size: 20px;
+  text-decoration: underline;
+  text-align: center;
+  font-weight: bold;
 }
 
 .placeImg {
-	width: 280px;
-	height: 200px;
+  padding-top: 5px;
+  width: 280px;
+  height: 200px;
 }
 
 .sectionName {
-	padding-left: 10px;
-	height: 20px;
-	font-size: 10px;
-	word-break: break-all
+  font-size: 15px;
 }
 
 .sectionContent {
-	padding-left: 20px;
-}
-
-.detail {
-  text-align: center;
-  padding: 10px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .logoImg {
@@ -33,7 +27,5 @@
 }
 
 .menuItem {
-  margin: 0px;
-  padding: 0px;
-  height: 30px;
+  font-size: 15px;
 }

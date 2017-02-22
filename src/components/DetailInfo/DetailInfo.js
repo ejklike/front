@@ -12,7 +12,7 @@ class OpeningHours extends React.Component {
       <div>
         {this.props.weekday_text.map((day,i) => {
           return(
-            <div key={i}>{day}</div>
+            <div className={styles.sectionContent} key={i}>{day}</div>
           );
         })}
       </div>
@@ -92,15 +92,22 @@ class DetailInfo extends React.Component {
                      src={typeof this.props.detail.photos !== 'undefined'? this.props.detail.photos[0].getUrl({'maxWidth': 280, 'maxHeight': 200}) : noImg} />
         </div>
         <div>
-          <div className={styles.menuItem}> 전화번호 : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</div>
+          {
+            <div className={styles.menuItem}>
+              <div className={styles.sectionName}>전화번호</div>
+              <div className={styles.sectionContent}>
+                {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}<br/>
+              </div>
+            </div>
+          }
           <div>
             {this.props.detail.opening_hours &&
-              <a className={styles.menuItem} onClick={this.onClick} href='#' >운영 시간 보기<br/></a>
+              <a className={styles.sectionName} onClick={this.onClick} href='#' >운영 시간 보기<br/></a>
             }
             {
               this.state.showOpeningHours && 
               this.props.detail.opening_hours.weekday_text && 
-              <OpeningHours 
+              <OpeningHours className={styles.sectionContent}
                 weekday_text={this.props.detail.opening_hours.weekday_text} 
               />
             }
