@@ -3,6 +3,7 @@
 	font-size: 20px;
 	text-decoration: underline;
 	text-align: center;
+	font-weight: bold;
 }
 
 .placeImg {
@@ -21,19 +22,17 @@
 	padding-left: 20px;
 }
 
-#storeInfo {
-	background: red;
-}
-
 .detail {
 	text-align: center;
-	padding: 15px;
-}
-
-#placeName {
-	font-weight: bold;
+	padding: 10px;
 }
 
 img {
 	opacity: 1.0;
+}
+
+.menuItem {
+  margin: 0px;
+  padding: 0px;
+  height: 35px;
 }

@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './DetailInfo.css';
 import noImg from '../../../img/no-image.jpg';
-import tabelogLogo from '../../../img/logos/tabelogLogo.png';
-import tripadvisorLogo from '../../../img/logos/tripadvisorLogo.png';
 
 class OpeningHours extends React.Component {
   constructor(props){
@@ -58,21 +56,20 @@ class DetailImg extends React.Component {
   render(){
     return(
       <div>
-        img in here
       </div>
     );
   }
 }
 
 class DetailInfo extends React.Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
     this.state = {
       showOpeningHours: false
     }
 
     this.onClick = this.onClick.bind(this);
-	}
+  }
 
   onClick(e){
     e.preventDefault();
@@ -81,8 +78,8 @@ class DetailInfo extends React.Component {
     })
   }
 
-	render() {
-		return(
+  render() {
+    return(
       <div>
         <div className={styles.placeName}>
           <a target="_blank" href={this.props.detail.website ? this.props.detail.website : '/'}>
@@ -94,15 +91,14 @@ class DetailInfo extends React.Component {
           <img width="270" height="200" className={styles.placeImg} 
                      src={typeof this.props.detail.photos !== 'undefined'? this.props.detail.photos[0].getUrl({'maxWidth': 280, 'maxHeight': 200}) : noImg} />
         </div>
-        <div id="storeInfo">
-            <div className="menu-item"> 전화번호 : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</div>
-          <div id="opening_hours">
+        <div>
+          <div className={styles.menuItem}> 전화번호 : {this.props.detail.international_phone_number ? this.props.detail.international_phone_number : 'None'}</div>
+          <div>
             {this.props.detail.opening_hours &&
-              <a className="menu-item" onClick={this.onClick} href='#' >
-                운영 시간 보기</a>}
-          <br />
-            {this.state.showOpeningHours && 
-
+              <a className={styles.menuItem} onClick={this.onClick} href='#' >운영 시간 보기<br/></a>
+            }
+            {
+              this.state.showOpeningHours && 
               this.props.detail.opening_hours.weekday_text && 
               <OpeningHours 
                 weekday_text={this.props.detail.opening_hours.weekday_text} 
