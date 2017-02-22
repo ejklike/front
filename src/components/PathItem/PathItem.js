@@ -20,8 +20,8 @@ class PathItem extends React.Component {
 		if(this.props.idx%2 === 0) {
 			if(this.props.path.placeName) {
 				return (
-					<a id="spot" className="menu-item" href="/">
-						{this.props.path.placeName}
+					<a id="spot" className={styles.spotRow} href="/">
+						<strong>{this.props.path.placeName}</strong>
 					</a>
 				);
 			}
@@ -29,7 +29,7 @@ class PathItem extends React.Component {
 			if(this.props.path.bus && this.props.path.car && this.props.path.subway && this.props.path.walk) {
 				return (
 					<div>
-				    <Input name={this.props.idx} type='radio' value='car' label={this.props.path.car.text} 
+				    <Input name={this.props.idx} type='radio' value='car' label={this.props.path.car.text} className={styles.inputRow}
 				    		onClick={this.handleClick.bind(this,this.props.path.car.value)}/>
     				<Input name={this.props.idx} type='radio' value='walk' label={this.props.path.walk.text} 
     						onClick={this.handleClick.bind(this,this.props.path.walk.value)}/>

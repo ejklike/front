@@ -3084,14 +3084,14 @@ nav {
 
 @media only screen and (min-width: 601px) {
   nav.nav-extended .nav-wrapper {
-    min-height: 64px; }
+    min-height: 40px; }
 
   nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
-    height: 64px;
-    line-height: 64px; }
+    height: 40px;
+    line-height: 40px; }
 
   .navbar-fixed {
-    height: 64px; } }
+    height: 40px; } }
 @font-face {
   font-family: "Roboto";
   src: local(Roboto Thin), url("../fonts/roboto/Roboto-Thin.eot");
