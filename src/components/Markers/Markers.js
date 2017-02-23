@@ -158,19 +158,54 @@ class Markers extends React.Component {
     var request = new XMLHttpRequest();
     var maps = this.props.map;
 
-    if(this.props.category === "식사/카페/바") {
+    if(this.props.category === "식사") {
+      //'restaurant'
       request.open('GET', 'http://api.norang.io/tokyo/place/list/eat', true);
       imgUrl = './assets/img/icons/restaurant.png';
+    } else if(this.props.category === "커피/베이커리") {
+      //'cafe', 'bakery'
+      request.open('GET', 'http://api.norang.io/tokyo/place/list/coffee', true);
+      imgUrl = './assets/img/icons/coffee.png';
+    } else if(this.props.category === "바") {
+      //'bar'
+      request.open('GET', 'http://api.norang.io/tokyo/place/list/bar', true);
+      imgUrl = './assets/img/icons/bar.png';
     } else if(this.props.category === "쇼핑") {
+      //'shop'
       request.open('GET', 'http://api.norang.io/tokyo/place/list/shop', true);
       imgUrl = './assets/img/icons/shopping.png';
-    } else if(this.props.category === "볼거리") {
-      request.open('GET', 'http://api.norang.io/tokyo/place/list/interest', true);
-      imgUrl = './assets/img/icons/entertainment.png';
+    } else if(this.props.category === "문화") {
+      //'museum', 'art_gallery',
+      request.open('GET', 'http://api.norang.io/tokyo/place/list/culture', true);
+      imgUrl = './assets/img/icons/culture.png';
+    } else if(this.props.category === "오락") { 
+      //'amusement_park', 'zoo', 'aquarium'
+      request.open('GET', 'http://api.norang.io/tokyo/place/list/amusement', true);
+      imgUrl = './assets/img/icons/amusement.png';
+    } else if(this.props.category === "공원/신사") { 
+      //'place_of_worship', 'park'
+      request.open('GET', 'http://api.norang.io/tokyo/place/list/park', true);
+      imgUrl = './assets/img/icons/park.png';
     } else if(this.props.category === "숙박") {
+      //'lodging'
       request.open('GET', 'http://api.norang.io/tokyo/place/list/hotel', true);
-      imgUrl = './assets/img/icons/history.png';
+      imgUrl = './assets/img/icons/hotel.png';
     }
+
+
+    // if(this.props.category === "식사/카페/바") {
+    //   request.open('GET', 'http://api.norang.io/tokyo/place/list/eat', true);
+    //   imgUrl = './assets/img/icons/restaurant.png';
+    // } else if(this.props.category === "쇼핑") {
+    //   request.open('GET', 'http://api.norang.io/tokyo/place/list/shop', true);
+    //   imgUrl = './assets/img/icons/shopping.png';
+    // } else if(this.props.category === "볼거리") {
+    //   request.open('GET', 'http://api.norang.io/tokyo/place/list/interest', true);
+    //   imgUrl = './assets/img/icons/amusement.png';
+    // } else if(this.props.category === "숙박") {
+    //   request.open('GET', 'http://api.norang.io/tokyo/place/list/hotel', true);
+    //   imgUrl = './assets/img/icons/park.png';
+    // }
 
     request.onload = () => {
       if(request.status === 200){

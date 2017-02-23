@@ -14,7 +14,7 @@ class Container extends React.Component {
         <Map google={window.google}>
           <BlogSidebar/>
           {this.props.categoryData.map((category, i) => {
-            if(i < 4) {
+            if(i < 7) {
               return (
                 <Markers category={category.categoryName}
                               key={i}

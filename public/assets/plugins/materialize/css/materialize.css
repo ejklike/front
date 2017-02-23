@@ -2957,8 +2957,7 @@ nav {
   background-color: #37474f;
   width: 100%;
   height: 56px;
-  line-height: 56px;
-  opacity: 0.8; }
+  line-height: 56px; }
   nav.nav-extended {
     height: 100%; }
     nav.nav-extended .nav-wrapper {
