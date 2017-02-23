@@ -1,23 +1,34 @@
-.content {
-  background: #364a6d;
-  font-size: 13px;
-  /*white-space: nowrap;*/
-  word-wrap: break-word;
-  line-height: 19px;
-  margin: 5px;
+.container{
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 5px;
   padding: 5px;
-}
-.reviewHead{
-  margin-top: 0px;
-  font:13px;
 }
 .reviewTime{
   margin-top: 0px;
-  font:10px;
+  font-size:12px;
+  line-height: 12px;
+  text-align: right;
+  word-wrap: break-word;
 }
 .review{
   margin-top: 0px;
-  font:15px;
+  word-wrap: break-word;
+  line-height: 19px;
+  font-size:12px;
+}
+.substars {
+  margin-top: 0px;
+  line-height:6px;
+  font-size: 11px;
+  /*text-align: left;*/
+}
+.subbar {
+    margin-top:5px;
+    /*margin-bottom:5px;*/
+    height: 1px;
+    width: 80%;
+    background: #666666;
 }
 .iconImg {
   opacity: 1.0;
