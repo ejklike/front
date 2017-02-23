@@ -10,8 +10,6 @@ class PathItem extends React.Component {
     }
 
     handleClick(val) {
-        console.log("idx", this.props.idx/2 - 0.5);
-
         this.props.onTravelTimeChange(this.props.idx/2 - 0.5, val);
         this.props.onUpdateTravelTimeSum();
     }

@@ -42,8 +42,8 @@ class BlogSidebar extends React.Component {
         placesService.getDetails(request, (response, status) => {
           if (status === window.google.maps.places.PlacesServiceStatus.OK) {
             if(dummy[place_id]) {
-              response.tabelog_rating = dummy[place_id].tabelog_rating;
-              response.tripadvisor_rating = dummy[place_id].tripadvisor_rating;
+              response.tabelog_rating = dummy[place_id].tabelog_rating.toFixed(1);
+              response.tripadvisor_rating = dummy[place_id].tripadvisor_rating.toFixed(1);
               setTimeout(resolve, 0, response);
             } else {
               response.tabelog_rating = -1;

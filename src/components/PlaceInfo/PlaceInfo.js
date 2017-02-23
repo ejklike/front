@@ -43,15 +43,40 @@ class PlaceInfo extends React.Component {
       return (
         <div>
           <strong>{this.props.name}</strong><br />
-          rating: {this.props.rating}
+          rating: {this.props.rating && 
+                    this.props.rating == 5 ? "⭐⭐⭐⭐⭐": (
+                      this.props.rating >= 4 ? "⭐⭐⭐⭐\u00a0\u00a0": (
+                        this.props.rating >= 3 ? "⭐⭐⭐  ": "⭐⭐   "
+                      )
+                    )
+                  }
         </div>
       );
     } else {
       return (
         <div>
           <strong>{this.props.name}</strong><br />
-          rating: {this.props.rating}<br />
-          price level: {this.props.price_level}
+          rating: {this.props.rating && 
+                    this.props.rating == 5 ? "⭐⭐⭐⭐⭐": (
+                      this.props.rating >= 4 ? "⭐⭐⭐⭐\u00a0\u00a0": (
+                        this.props.rating >= 3 ? "⭐⭐⭐  ": "⭐⭐   "
+                      )
+                    )
+                  }
+          <br />
+          price level: 
+          {/*{this.props.price_level}*/}
+          {
+            this.props.price_level && 
+            this.props.price_level == 4 ? "💲💲💲💲": (
+              this.props.price_level == 3 ? "💲💲💲": (
+                this.props.price_level == 2 ? "💲💲": (
+                  this.props.price_level == 1 ? "💲": "free"
+                )
+              )
+            )
+          }
+          <br />
         </div>
       );
     }

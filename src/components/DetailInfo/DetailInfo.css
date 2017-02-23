@@ -1,3 +1,7 @@
+.container{
+  margin-bottom: 5px;
+}
+
 .placeName {
   background: #a05591;
   font-size: 20px;
@@ -18,14 +22,62 @@
 
 .sectionContent {
   font-size: 14px;
+  /*white-space: nowrap;*/
+  word-wrap: break-word;
   line-height: 20px;
 }
 
 .logoImg {
   opacity: 1.0;
-  height: 10px;
+  /*height: 20px;*/
+  width: 75px;
+  vertical-align:middle;
+  margin-right: 5px;
+}
+
+.iconImg {
+  opacity: 1.0;
+  height: 17px;
+  vertical-align:middle;
+  margin-right: 5px;
+
 }
 
 .menuItem {
+  /*padding-top: 3px;*/
+  /*padding-bottom: 3px;*/
   font-size: 15px;
+  line-height: 40px;
 }
+
+.bar {
+    margin-top:5px;
+    margin-bottom:5px;
+    height: 1px;
+    background: #666666;
+}
+
+.iframe {
+  visibility:visible;
+  width:100%;
+  height:100%;
+}
+
+.rating {
+  /*color: #978558;*/
+
+  font-size: 24px;
+  font-family: Arial;
+  font-weight: 300;
+  margin-bottom: 0px;
+}
+.stars {
+  margin-top: 0px;
+  line-height:10px;
+  /*text-align: left;*/
+}
+
+.tg  {border-collapse:collapse;border-spacing:0;table-layout: fixed;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.tg .tg2{text-align:center;vertical-align:top;}

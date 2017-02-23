@@ -5,10 +5,10 @@ import update from '../../node_modules/react-addons-update';
 
 const categoryInitialState = {
   categoryData: [
-    { categoryName: "식사", isPressed: false },
+    { categoryName: "식사/카페/바", isPressed: false },
     { categoryName: "쇼핑", isPressed: false },
-    { categoryName: "유흥", isPressed: false },
-    { categoryName: "유적", isPressed: false },
+    { categoryName: "볼거리", isPressed: false },
+    { categoryName: "숙박", isPressed: false },
     { categoryName: "핫플", isPressed: false }
   ]
 };

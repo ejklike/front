@@ -10,11 +10,14 @@ var Button = require('react-button');
 var themes = Button.themes;
 
 themes.default.style = {
-  width: '260px',
+  width: '130px',
   height: '30px',
   position: 'fixed',
-  right: '10px',
-  bottom: '10px'
+  right: '150px',
+  bottom: '10px',
+  border: 'solid', 
+  borderColor: '#4db6ac',
+  borderWidth: '1px'
 }
 themes.default.overStyle = {
   background: '#4db6ac'
@@ -96,7 +99,10 @@ class PathSidebar extends React.Component {
           })}
            <Button onClick={this.props.onPathAddModeToggle}
                   pressed={this.props.isPathAddMode}>
-                  경로 추가</Button>  
+                  경로 추가</Button>
+          <div className={styles.travelTimeSum}>
+            {this.state.travelTimeSum}
+          </div>
         </Menu>
       </div>
     );

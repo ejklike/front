@@ -1,3 +1,6 @@
+.container {
+	display: flex;
+}
 .finalButton {
 	position: fixed;
 	right: 10px;
@@ -6,11 +9,6 @@
 
 .travelTimeSum {
 	position: fixed;
-	background: black;
-	color: red;
-	opacity: 0.6;
-	z-index: 8888;
-	width: 100px;
 	right: 10px;
 	bottom: 10px;
 }

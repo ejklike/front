@@ -158,16 +158,16 @@ class Markers extends React.Component {
     var request = new XMLHttpRequest();
     var maps = this.props.map;
 
-    if(this.props.category === "식사") {
+    if(this.props.category === "식사/카페/바") {
       request.open('GET', 'http://api.norang.io/tokyo/place/list/eat', true);
       imgUrl = './assets/img/icons/restaurant.png';
     } else if(this.props.category === "쇼핑") {
       request.open('GET', 'http://api.norang.io/tokyo/place/list/shop', true);
       imgUrl = './assets/img/icons/shopping.png';
-    } else if(this.props.category === "유흥") {
+    } else if(this.props.category === "볼거리") {
       request.open('GET', 'http://api.norang.io/tokyo/place/list/interest', true);
       imgUrl = './assets/img/icons/entertainment.png';
-    } else if(this.props.category === "유적") {
+    } else if(this.props.category === "숙박") {
       request.open('GET', 'http://api.norang.io/tokyo/place/list/hotel', true);
       imgUrl = './assets/img/icons/history.png';
     }
