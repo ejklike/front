@@ -72,8 +72,7 @@ class BlogSidebar extends React.Component {
       bmMenu: {
         background: '#373a47',
         padding: '0px',
-         fontSize: '1.15em',
-        opacity: 0.8
+         fontSize: '1.15em'
       },
       bmItemList: {
         overflow: 'auto',
