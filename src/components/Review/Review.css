@@ -1,0 +1,21 @@
+.content {
+  background: #364a6d;
+  font-size: 13px;
+  /*white-space: nowrap;*/
+  word-wrap: break-word;
+  line-height: 19px;
+  margin: 5px;
+  padding: 5px;
+}
+.reviewHead{
+  margin-top: 0px;
+  font:13px;
+}
+.reviewTime{
+  margin-top: 0px;
+  font:10px;
+}
+.review{
+  margin-top: 0px;
+  font:15px;
+}
