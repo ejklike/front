@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Review.css';
 
 class Review extends React.Component {
 	constructor(props) {
@@ -15,7 +16,7 @@ class Review extends React.Component {
 		var review = this.props.review;
 		return(
 			<div className="menu-item">
-				작성자 : {review.author_name}
+				<img className={styles.iconImg} src='./assets/img/icons/review.svg'/> {review.author_name}
 				<br />
 				작성 시간 : {review.relative_time_description}
 				<br />
