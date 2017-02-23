@@ -335,7 +335,7 @@ class DetailInfo extends React.Component {
           <div classNmae={styles.container}>
             {
               <div className={styles.menuItem}>
-              <img className={styles.iconImg}  src='./assets/img/icons/naver.png'/><a href="http://naver.com" target="_blank">네이버 검색결과 보기</a>
+              <img className={styles.iconImg}  src='./assets/img/icons/naver.png'/><a href={"https://search.naver.com/search.naver?query="+this.props.detail.name} target="_blank">네이버 검색결과 보기</a>
             </div>
           }
         </div>
@@ -343,7 +343,7 @@ class DetailInfo extends React.Component {
           <div classNmae={styles.container}>
             {
               <div className={styles.menuItem}>
-              <img className={styles.iconImg}  src='./assets/img/icons/google.png'/><a href="http://google.com" target="_blank">구글 검색결과 보기</a>
+              <img className={styles.iconImg}  src='./assets/img/icons/google.png'/><a href={"https://www.google.co.kr/webhp?hl=ko&ictx=2&sa=X&ved=0ahUKEwjp2POO2KXSAhVN0WMKHX87DMcQPQgD#hl=ko&q="+this.props.detail.name} target="_blank">구글 검색결과 보기</a>
             </div>
           }
         </div>
