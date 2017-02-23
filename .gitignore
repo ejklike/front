@@ -4,3 +4,4 @@ materialize/*
 .sass-cache/*
 *.swp
 build/*
+*.DS_Store
