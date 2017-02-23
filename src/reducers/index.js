@@ -4,11 +4,19 @@ import { combineReducers } from 'redux';
 import update from '../../node_modules/react-addons-update';
 
 const categoryInitialState = {
+  //"식사" "커피/베이커리" "바" "쇼핑" "문화" "오락" "공원/신사" "숙박"
   categoryData: [
     { categoryName: "식사/카페/바", isPressed: false },
     { categoryName: "쇼핑", isPressed: false },
     { categoryName: "볼거리", isPressed: false },
     { categoryName: "숙박", isPressed: false },
+    // { categoryName: "식사", isPressed: false },
+    // { categoryName: "커피/베이커리", isPressed: false },
+    // { categoryName: "바", isPressed: false },
+    // { categoryName: "쇼핑", isPressed: false },
+    // { categoryName: "문화", isPressed: false },
+    // { categoryName: "오락", isPressed: false },
+    // { categoryName: "공원/신사", isPressed: false },
     { categoryName: "핫플", isPressed: false }
   ]
 };

@@ -121,7 +121,6 @@ class DetailInfo extends React.Component {
               <div className={styles.sectionContent}>
                 <img className={styles.iconImg} src='./assets/img/icons/website.png'/>
                 <a href={this.props.detail.website} target="_blank">{this.props.detail.website}</a> <br/>
-
               </div>
             </div>  
           }
