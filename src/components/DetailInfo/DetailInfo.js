@@ -76,6 +76,7 @@ class DetailInfo extends React.Component {
 
 
   render() {
+    var detail = this.props.detail;
     return(
       <div>
         <div>
