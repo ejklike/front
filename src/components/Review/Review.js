@@ -14,15 +14,24 @@ class Review extends React.Component {
 
 	render(){
 		var review = this.props.review;
+    // 작성자와 레이팅을 한 줄에 나오게 바꿔주세요
 		return(
-			<div className="menu-item">
-				<img className={styles.iconImg} src='./assets/img/icons/review.svg'/> {review.author_name}
-				<br />
-				작성 시간 : {review.relative_time_description}
-				<br />
-				점수 : {review.rating}
-				<br />
-				내용 : {review.text}
+      <div>
+        <p className={styles.content}>
+				<img className={styles.iconImg} src='./assets/img/icons/review.svg'/>
+          <div className={styles.reviewHead}>
+            작성자 : {review.author_name}
+          </div>
+          <div className={styles.reviewHead}>
+            {review.rating}
+          </div>
+          <div className={styles.reviewTime}>
+            작성 시간 : {review.relative_time_description}
+          </div>
+          <div className={styles.review}>
+            내용 : {review.text}
+          </div>
+        </p>
 			</div>
 		);
 	}
